@@ -1,0 +1,7 @@
+.app-container {
+    margin: 0 auto;
+    inline-size: 100%;
+    max-inline-size: 430px;
+    min-block-size: 100dvh;
+    padding: 1.5rem;
+}
