@@ -11,8 +11,8 @@ export class IconComponent {
     @Input() icon: string = 'mingcute:user-5-fill';
     @Input() size: number = 24;
 
-    @Input() color: string = '#727272';
-    @Input() hoverColor: string = '#a0a0a0';
+    @Input() color: string = 'var(--color-surface-4)';
+    @Input() hoverColor: string = 'var(--color-text-1)';
 
     hover = false;
 
