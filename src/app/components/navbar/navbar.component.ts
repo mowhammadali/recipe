@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { IconComponent } from '../../shared/components/icon/icon.component';
 
 @Component({
     selector: 'app-navbar',
-    imports: [],
+    imports: [IconComponent],
     templateUrl: './navbar.component.html',
-    styleUrl: './navbar.component.css',
+    styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {}
