@@ -1,0 +1,40 @@
+<div class="navbar">
+    <a
+        routerLink=""
+        class="link"
+        routerLinkActive="active"
+        #link1="routerLinkActive"
+        [routerLinkActiveOptions]="{ exact: true }"
+    >
+        <app-icon
+            icon="mingcute:chef-hat-fill"
+            [color]="link1.isActive ? '#2d2d2d' : '#adafaf'"
+            hoverColor="#2d2d2d"
+            [size]="30"
+        ></app-icon>
+    </a>
+    <a routerLink="recipes/create" class="link" routerLinkActive="active" #link2="routerLinkActive">
+        <app-icon
+            icon="mingcute:classify-add-2-fill"
+            [color]="link2.isActive ? '#2d2d2d' : '#adafaf'"
+            hoverColor="#2d2d2d"
+            [size]="30"
+        ></app-icon>
+    </a>
+    <a routerLink="my-recipes" class="link" routerLinkActive="active" #link3="routerLinkActive">
+        <app-icon
+            icon="mingcute:bookmarks-fill"
+            [color]="link3.isActive ? '#2d2d2d' : '#adafaf'"
+            hoverColor="#2d2d2d"
+            [size]="30"
+        ></app-icon>
+    </a>
+    <a routerLink="login" class="link" routerLinkActive="active" #link4="routerLinkActive">
+        <app-icon
+            icon="mingcute:entrance-fill"
+            [color]="link4.isActive ? '#2d2d2d' : '#adafaf'"
+            hoverColor="#2d2d2d"
+            [size]="30"
+        ></app-icon>
+    </a>
+</div>
