@@ -3,7 +3,13 @@
         <h5>{{ title }}</h5>
         <a [routerLink]="navigationLink" class="recipe-carousel-navigation">See all</a>
     </div>
-    <swiper-container slides-per-view="auto" space-between="12" grab-cursor="true" loop="true">
+    <swiper-container
+        slides-per-view="auto"
+        space-between="12"
+        grab-cursor="true"
+        loop="true"
+        autoplay='{"delay": 2500, "disableOnInteraction": false}'
+    >
         <swiper-slide *ngFor="let recipe of recipes">
             <div class="recipe-carousel-card">
                 <img [src]="recipe.image" />
