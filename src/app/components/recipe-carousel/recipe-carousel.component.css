@@ -7,6 +7,24 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        h5 {
+            color: var(--color-text-3);
+            font-size: 1rem;
+        }
+
+        .recipe-carousel-navigation {
+            text-decoration: none;
+            color: var(--color-primary);
+        }
+    }
+
+    swiper-container {
+        width: 100%;
+    }
+
+    swiper-slide {
+        width: auto;
     }
 
     .recipe-carousel-card {
@@ -15,10 +33,12 @@
         block-size: 16rem;
         border-radius: 1rem;
         overflow: hidden;
+        flex-shrink: 0;
 
         img {
             inline-size: 100%;
             block-size: 100%;
+            object-fit: cover;
         }
 
         .recipe-carousel-glass-box {

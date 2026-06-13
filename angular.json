@@ -24,7 +24,11 @@
                                 "input": "public"
                             }
                         ],
-                        "styles": ["src/styles.css", "src/app/styles/colors.css"],
+                        "styles": [
+                            "src/styles.css",
+                            "src/app/styles/colors.css",
+                            "node_modules/swiper/swiper-bundle.css"
+                        ],
                         "scripts": []
                     },
                     "configurations": {
