@@ -3,21 +3,25 @@
         <h5>{{ title }}</h5>
         <a [routerLink]="navigationLink" class="recipe-carousel-navigation">See all</a>
     </div>
-    <swiper-container
-        slides-per-view="auto"
-        space-between="12"
-        grab-cursor="true"
-        loop="true"
-        autoplay='{"delay": 2500, "disableOnInteraction": false}'
-    >
+    <swiper-container slides-per-view="auto" space-between="12" grab-cursor="true" loop="true">
         <swiper-slide *ngFor="let recipe of recipes">
             <div class="recipe-carousel-card">
                 <img [src]="recipe.image" />
                 <div class="recipe-carousel-glass-box">
-                    <h6>{{ recipe.name }}</h6>
+                    <h6>{{ recipe.name | truncate: 15 }}</h6>
                     <footer>
-                        <p>{{ recipe.cookTimeMinutes }} min</p>
-                        <app-icon icon="mingcute:bookmark-line"></app-icon>
+                        <div class="recipe-carousel-time">
+                            <p>{{ recipe.cookTimeMinutes }} min</p>
+                            <app-icon
+                                icon="mingcute:time-fill"
+                                color="var(--color-surface-3)"
+                                [size]="18"
+                            ></app-icon>
+                        </div>
+                        <app-icon
+                            icon="mingcute:bookmark-line"
+                            color="var(--color-surface-3)"
+                        ></app-icon>
                     </footer>
                 </div>
             </div>

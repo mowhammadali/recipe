@@ -67,8 +67,14 @@
                 align-items: center;
                 justify-content: space-between;
 
-                p {
-                    color: var(--color-surface-2);
+                .recipe-carousel-time {
+                    display: flex;
+                    align-items: flex-end;
+                    gap: 0.5rem;
+
+                    p {
+                        color: var(--color-surface-2);
+                    }
                 }
             }
         }
