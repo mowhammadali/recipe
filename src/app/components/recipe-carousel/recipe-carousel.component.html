@@ -1,7 +1,7 @@
 <div class="recipe-carousel">
     <div class="recipe-carousel-header">
         <h5>{{ title }}</h5>
-        <a routerLink="recipes" class="recipe-carousel-navigation">See all</a>
+        <a [routerLink]="navigationLink" class="recipe-carousel-navigation">See all</a>
     </div>
     <swiper-container
         slides-per-view="auto"
@@ -10,61 +10,13 @@
         loop="true"
         autoplay='{"delay": 2500, "disableOnInteraction": false}'
     >
-        <swiper-slide>
+        <swiper-slide *ngFor="let recipe of recipes">
             <div class="recipe-carousel-card">
-                <img src="/images/1.webp" />
+                <img [src]="recipe.image" />
                 <div class="recipe-carousel-glass-box">
-                    <h6>Mixin sea food</h6>
+                    <h6>{{ recipe.name }}</h6>
                     <footer>
-                        <p>6 min</p>
-                        <app-icon icon="mingcute:bookmark-line"></app-icon>
-                    </footer>
-                </div>
-            </div>
-        </swiper-slide>
-        <swiper-slide>
-            <div class="recipe-carousel-card">
-                <img src="/images/1.webp" />
-                <div class="recipe-carousel-glass-box">
-                    <h6>Chicken burger</h6>
-                    <footer>
-                        <p>10 min</p>
-                        <app-icon icon="mingcute:bookmark-line"></app-icon>
-                    </footer>
-                </div>
-            </div>
-        </swiper-slide>
-        <swiper-slide>
-            <div class="recipe-carousel-card">
-                <img src="/images/1.webp" />
-                <div class="recipe-carousel-glass-box">
-                    <h6>Pasta cream</h6>
-                    <footer>
-                        <p>8 min</p>
-                        <app-icon icon="mingcute:bookmark-line"></app-icon>
-                    </footer>
-                </div>
-            </div>
-        </swiper-slide>
-        <swiper-slide>
-            <div class="recipe-carousel-card">
-                <img src="/images/1.webp" />
-                <div class="recipe-carousel-glass-box">
-                    <h6>Beef steak</h6>
-                    <footer>
-                        <p>15 min</p>
-                        <app-icon icon="mingcute:bookmark-line"></app-icon>
-                    </footer>
-                </div>
-            </div>
-        </swiper-slide>
-        <swiper-slide>
-            <div class="recipe-carousel-card">
-                <img src="/images/1.webp" />
-                <div class="recipe-carousel-glass-box">
-                    <h6>Veg salad</h6>
-                    <footer>
-                        <p>5 min</p>
+                        <p>{{ recipe.cookTimeMinutes }} min</p>
                         <app-icon icon="mingcute:bookmark-line"></app-icon>
                     </footer>
                 </div>

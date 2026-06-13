@@ -10,5 +10,16 @@
             </p>
         </div>
     </header>
-    <app-recipe-carousel carousel-title="Most Popular"></app-recipe-carousel>
+    <app-recipe-carousel
+        carousel-title="Most Popular"
+        [recipes-data]="mostPopularRecipesData()"
+        [is-fetching]="mostPopularRecipesLoading()"
+        navigation-link="recipes"
+    ></app-recipe-carousel>
+    <app-recipe-carousel
+        carousel-title="Desserts"
+        [recipes-data]="dessertData()"
+        [is-fetching]="dessertLoading()"
+        navigation-link="recipes"
+    ></app-recipe-carousel>
 </div>
