@@ -2,11 +2,17 @@
     position: relative;
     margin: 0 auto;
     inline-size: 100%;
-    max-inline-size: 400px;
+    max-inline-size: 430px;
     min-block-size: 100dvh;
     background-color: var(--color-surface-2);
 
     & > main {
         padding: 1.5rem;
+    }
+}
+
+@media screen and (width <= 430) {
+    .app-container {
+        max-inline-size: 100%;
     }
 }
