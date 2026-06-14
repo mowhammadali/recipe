@@ -1,5 +1,12 @@
 <div class="recipes-list">
-    <app-recipe-card></app-recipe-card>
-    <app-recipe-card></app-recipe-card>
-    <app-recipe-card></app-recipe-card>
+    @if (isLoading()) {
+        <app-skeleton height="14rem"></app-skeleton>
+        <app-skeleton height="14rem"></app-skeleton>
+        <app-skeleton height="14rem"></app-skeleton>
+        <app-skeleton height="14rem"></app-skeleton>
+    } @else {
+        @for (recipe of recipes(); track $index) {
+            <app-recipe-card [recipe]="recipe"></app-recipe-card>
+        }
+    }
 </div>
