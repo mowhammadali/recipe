@@ -1,6 +1,11 @@
 <div class="recipes-controls">
     <div class="search-container">
-        <input type="text" class="search-input" placeholder="Search recipe..." />
+        <input
+            type="text"
+            class="search-input"
+            placeholder="Search recipe..."
+            [formControl]="searchControl"
+        />
         <app-icon
             [size]="18"
             icon="mingcute:search-line"
