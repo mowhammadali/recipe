@@ -12,7 +12,7 @@
     >
         <swiper-slide *ngFor="let recipe of recipes">
             <div class="recipe-carousel-card">
-                <img [src]="recipe.image" />
+                <img [ngSrc]="recipe.image" fill loading="lazy" />
                 <div class="recipe-carousel-glass-box">
                     <h6>{{ recipe.name | truncate: 15 }}</h6>
                     <footer>

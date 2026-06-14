@@ -3,10 +3,12 @@ import { RecipesService } from '../../services/recipes.service';
 import { RecipeCarouselComponent } from '../../components/recipe-carousel/recipe-carousel.component';
 import { finalize, map } from 'rxjs';
 import { type RecipeType } from '../../types/recipes.type';
+import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
     selector: 'app-home',
-    imports: [RecipeCarouselComponent],
+    imports: [RecipeCarouselComponent, SkeletonComponent, NgOptimizedImage],
     templateUrl: './home.component.html',
     styleUrl: './home.component.css',
 })
