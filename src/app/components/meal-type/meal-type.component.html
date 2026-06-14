@@ -1,0 +1,12 @@
+<div class="meal-type">
+    @for (meal of meals; track $index) {
+        <section
+            class="meal"
+            [ngClass]="{ active: meal.query == query() }"
+            (click)="setQuery(meal.query)"
+        >
+            <img [src]="meal.image" />
+            <p>{{ meal.title }}</p>
+        </section>
+    }
+</div>
