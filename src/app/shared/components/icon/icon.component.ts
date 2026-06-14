@@ -10,9 +10,9 @@ import { Component, Input } from '@angular/core';
 export class IconComponent {
     @Input() icon: string = 'mingcute:user-5-fill';
     @Input() size: number = 24;
-
     @Input() color: string = 'var(--color-surface-4)';
     @Input() hoverColor: string = 'var(--color-text-1)';
+    @Input() customStyles: { [key: string]: string } = {};
 
     hover = false;
 
@@ -22,6 +22,7 @@ export class IconComponent {
 
     get styles() {
         return {
+            ...this.customStyles,
             width: this.size + 'px',
             height: this.size + 'px',
             backgroundColor: this.hover ? this.hoverColor : this.color,
