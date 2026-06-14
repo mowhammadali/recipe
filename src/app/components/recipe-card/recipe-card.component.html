@@ -1,0 +1,27 @@
+<div class="recipe-card">
+    <div class="background-wrapper">
+        <img src="/images/1.webp" />
+        <div class="rating">
+            <p>4.2</p>
+            <app-icon color="#ebab34" [size]="16" icon="ic:outline-star-purple500"></app-icon>
+        </div>
+    </div>
+    <p class="title">{{ 'Classic Margherita Pizza' | truncate: 14 }}</p>
+    <div class="info">
+        <div class="duration">
+            <app-icon
+                [size]="14"
+                icon="mingcute:history-anticlockwise-fill"
+                color="var(--color-text-3)"
+                hoverColor="var(--color-text-3)"
+            ></app-icon>
+            <p>5 Min</p>
+        </div>
+        <app-icon
+            color="var(--color-text-3)"
+            icon="mingcute:bookmark-line"
+            [size]="16"
+            [customStyles]="{ cursor: 'pointer' }"
+        ></app-icon>
+    </div>
+</div>
