@@ -1,1 +1,45 @@
-<p>Home work</p>
+<div class="home">
+    <header>
+        <h1 class="home-title">Hungry? Let’s cook!</h1>
+        <div class="home-banner-wrapper">
+            <img ngSrc="/images/banner.png" alt="banner" class="home-banner" fill priority />
+            <h3>Feeling Better!</h3>
+            <p>
+                Make something tasty and <br />
+                enjoy your day
+            </p>
+        </div>
+    </header>
+    @if (mostPopularRecipesLoading()) {
+        <div class="home-skeleton-container">
+            <app-skeleton height="20px" width="150px"></app-skeleton>
+            <div class="skeleton-items-container">
+                <app-skeleton height="16rem" width="14rem"></app-skeleton>
+                <app-skeleton height="16rem" width="14rem"></app-skeleton>
+            </div>
+        </div>
+    } @else {
+        <app-recipe-carousel
+            carousel-title="Most Popular"
+            [recipes-data]="mostPopularRecipesData()"
+            [is-fetching]="mostPopularRecipesLoading()"
+            navigation-link="recipes"
+        ></app-recipe-carousel>
+    }
+    @if (dessertLoading()) {
+        <div class="home-skeleton-container">
+            <app-skeleton height="20px" width="150px"></app-skeleton>
+            <div class="skeleton-items-container">
+                <app-skeleton height="16rem" width="14rem"></app-skeleton>
+                <app-skeleton height="16rem" width="14rem"></app-skeleton>
+            </div>
+        </div>
+    } @else {
+        <app-recipe-carousel
+            carousel-title="Desserts"
+            [recipes-data]="dessertData()"
+            [is-fetching]="dessertLoading()"
+            navigation-link="recipes"
+        ></app-recipe-carousel>
+    }
+</div>
