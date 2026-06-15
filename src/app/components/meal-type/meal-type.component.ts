@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 type QueryType = string | null;
 
@@ -15,7 +16,12 @@ type MealType = {
     templateUrl: './meal-type.component.html',
     styleUrl: './meal-type.component.css',
 })
-export class MealTypeComponent {
+export class MealTypeComponent implements OnInit {
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute
+    ) {}
+
     public query = signal<QueryType>(null);
 
     public meals: MealType[] = [
@@ -29,7 +35,30 @@ export class MealTypeComponent {
         { title: 'Beverage', image: '/images/beverage.png', query: 'beverage' },
     ];
 
+    public ngOnInit(): void {
+        this.trackQueryParams();
+    }
+
     public setQuery(query: QueryType): void {
         this.query.set(query);
+        this.onChangeMeal(query);
+    }
+
+    private onChangeMeal(query: QueryType) {
+        this.router.navigate(['.'], {
+            relativeTo: this.route,
+            queryParams: { 'meal-type': query },
+            queryParamsHandling: 'merge',
+        });
+    }
+
+    private trackQueryParams(): void {
+        this.route.queryParams.subscribe((value) => {
+            const mealType = value['meal-type'];
+
+            if (mealType) {
+                this.query.set(mealType);
+            }
+        });
     }
 }

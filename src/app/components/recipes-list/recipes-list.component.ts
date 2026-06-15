@@ -5,6 +5,7 @@ import type { RecipeType } from '../../types/recipes.type';
 import { finalize, map } from 'rxjs';
 import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 import { ActivatedRoute, Params } from '@angular/router';
+import { StringUtil } from '../../shared/utils/string.util';
 
 type RequestParams = {
     params: string | undefined;
@@ -30,13 +31,19 @@ export class RecipesListComponent implements OnInit {
         this.trackParams();
     }
 
-    private getRecipes(requestParams?: RequestParams): void {
+    private getRecipes(requestParams?: RequestParams, mealType?: string): void {
         this.isLoading.set(true);
 
         this.recipesService
             .getRecipes(requestParams?.queryParams, undefined, requestParams?.params)
             .pipe(
                 map((preResponse) => {
+                    if (mealType) {
+                        return preResponse.recipes.filter((recipe) =>
+                            recipe.mealType.includes(StringUtil.capitalize(mealType))
+                        );
+                    }
+
                     return preResponse.recipes;
                 }),
                 finalize(() => {
@@ -64,6 +71,7 @@ export class RecipesListComponent implements OnInit {
             return;
         }
 
+        const mealType = params['meal-type'];
         const q = params['q'];
         const sortBy = params['sortBy'];
         const order = params['order'];
@@ -72,11 +80,13 @@ export class RecipesListComponent implements OnInit {
             Object.entries({ q, sortBy, order }).filter(([_, value]) => value !== undefined)
         );
 
-        const requestParams: RequestParams = {
-            params: '/search',
-            queryParams,
-        };
+        if (Object.entries(queryParams).length || mealType) {
+            const requestParams: RequestParams = {
+                params: '/search',
+                queryParams,
+            };
 
-        this.getRecipes(requestParams);
+            this.getRecipes(requestParams, mealType);
+        }
     }
 }

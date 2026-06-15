@@ -10,7 +10,7 @@ export class RecipesService {
     constructor(private api: ApiService) {}
 
     public getRecipes(params?: KeyValueType, headers?: KeyValueType, url: string = '') {
-        return this.api.get<RecipesResponseType>('/recipes' + url, {
+        return this.api.get<RecipesResponseType>('/recipes' + url + '?limit=0&skip=0', {
             headers,
             params,
         });

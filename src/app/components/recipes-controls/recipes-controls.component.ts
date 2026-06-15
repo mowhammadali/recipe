@@ -79,7 +79,7 @@ export class RecipesControlsComponent implements OnInit {
 
     private onSearch() {
         this.searchControl.valueChanges
-            .pipe(debounceTime(2000), distinctUntilChanged())
+            .pipe(debounceTime(1600), distinctUntilChanged())
             .subscribe((value) => {
                 this.router.navigate(['.'], {
                     relativeTo: this.route,
