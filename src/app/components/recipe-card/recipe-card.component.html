@@ -1,0 +1,37 @@
+<div class="recipe-card">
+    <div class="background-wrapper">
+        <img
+            [src]="recipe.image"
+            [alt]="recipe.name"
+            (click)="navigateToRecipeDetails(recipe.id)"
+        />
+        <div class="rating">
+            <p>{{ recipe.rating }}</p>
+            <app-icon color="#ebab34" [size]="16" icon="ic:outline-star-purple500"></app-icon>
+        </div>
+        <div class="bookmark">
+            <app-icon
+                color="var(--color-surface-1)"
+                icon="mingcute:bookmark-line"
+                [size]="18"
+                [customStyles]="{
+                    cursor: 'pointer',
+                }"
+            ></app-icon>
+        </div>
+    </div>
+    <p class="title">{{ recipe.name | truncate: 14 }}</p>
+
+    <div class="info">
+        <div class="duration">
+            <app-icon
+                [size]="14"
+                icon="mingcute:history-anticlockwise-fill"
+                color="var(--color-text-3)"
+                hoverColor="var(--color-text-3)"
+            ></app-icon>
+            <p>{{ recipe.cookTimeMinutes }} Min</p>
+        </div>
+        <a [routerLink]="['.', recipe.id]" class="recipe-navigation">More</a>
+    </div>
+</div>

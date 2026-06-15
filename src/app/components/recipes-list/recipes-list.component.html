@@ -1,0 +1,14 @@
+<div class="recipes-list">
+    @if (isLoading()) {
+        <app-skeleton height="14rem"></app-skeleton>
+        <app-skeleton height="14rem"></app-skeleton>
+        <app-skeleton height="14rem"></app-skeleton>
+        <app-skeleton height="14rem"></app-skeleton>
+    } @else if (!recipes().length) {
+        <h1 class="no-data-message">No Recipes Found!</h1>
+    } @else {
+        @for (recipe of recipes(); track $index) {
+            <app-recipe-card [recipe]="recipe"></app-recipe-card>
+        }
+    }
+</div>

@@ -1,0 +1,42 @@
+.recipes-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .search-container {
+        position: relative;
+        block-size: 2.4rem;
+        flex-grow: 2;
+
+        .search-input {
+            inline-size: 100%;
+            block-size: 100%;
+            border: none;
+            outline: none;
+            border-radius: 0.6rem;
+            padding-inline: 2.2rem;
+            color: var(--color-text-3);
+            font-size: 1rem;
+            background-color: var(--color-surface-1);
+
+            &::placeholder {
+                font-size: 0.9rem;
+            }
+        }
+
+        .icon-search {
+            position: absolute;
+            top: 5px;
+        }
+    }
+
+    .sort-container {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.mat-mdc-menu-item.active {
+    background: rgba(0, 0, 0, 0.08);
+}
