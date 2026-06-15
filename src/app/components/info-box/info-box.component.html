@@ -1,30 +1,30 @@
 <div class="info-box">
-    <h5>{{ recipe.name | truncate: 25 }}</h5>
+    <h5>{{ recipe.name | truncate: 28 }}</h5>
     <div class="details">
         <div class="icon-container">
             <app-icon
-                [size]="16"
+                [size]="18"
                 icon="mingcute:history-anticlockwise-fill"
-                color="var(--color-golden)"
-                hoverColor="var(--color-golden)"
+                color="var(--color-primary)"
+                hoverColor="var(--color-primary)"
             ></app-icon>
             <p>{{ recipe.cookTimeMinutes }} min</p>
         </div>
         <div class="icon-container">
             <app-icon
-                [size]="16"
+                [size]="18"
                 icon="mingcute:fire-fill"
-                color="var(--color-golden)"
-                hoverColor="var(--color-golden)"
+                color="var(--color-primary)"
+                hoverColor="var(--color-primary)"
             ></app-icon>
             <p>{{ recipe.caloriesPerServing }}</p>
         </div>
         <div class="icon-container">
             <app-icon
-                [size]="16"
+                [size]="18"
                 icon="mingcute:flag-4-fill"
-                color="var(--color-golden)"
-                hoverColor="var(--color-golden)"
+                color="var(--color-primary)"
+                hoverColor="var(--color-primary)"
             ></app-icon>
             <p>{{ recipe.cuisine }}</p>
         </div>

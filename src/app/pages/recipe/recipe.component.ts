@@ -6,10 +6,11 @@ import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.com
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { type RecipeType } from '../../types/recipes.type';
 import { InfoBoxComponent } from '../../components/info-box/info-box.component';
+import { IngredientsComponent } from '../../components/ingredients/ingredients.component';
 
 @Component({
     selector: 'app-recipe',
-    imports: [SkeletonComponent, IconComponent, RouterLink, InfoBoxComponent],
+    imports: [SkeletonComponent, IconComponent, RouterLink, InfoBoxComponent, IngredientsComponent],
     templateUrl: './recipe.component.html',
     styleUrl: './recipe.component.css',
 })

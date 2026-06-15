@@ -7,7 +7,7 @@
 
     .cover-container {
         position: relative;
-        margin-bottom: 4rem;
+        margin-bottom: 5rem;
         inline-size: 100%;
         block-size: 382px;
 
@@ -41,5 +41,9 @@
         .bookmark-contaienr {
             right: 0.5rem;
         }
+    }
+
+    .content {
+        margin-inline: 7.5%;
     }
 }
