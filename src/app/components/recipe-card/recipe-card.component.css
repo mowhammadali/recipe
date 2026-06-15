@@ -9,23 +9,32 @@
         position: relative;
 
         img {
+            cursor: pointer;
             inline-size: 100%;
             border-radius: 0.8rem;
             margin-bottom: 0.5rem;
         }
 
-        .rating {
+        .rating,
+        .bookmark {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             position: absolute;
             top: 0.4rem;
-            right: 0.5rem;
             padding: 0.3rem;
             border-radius: 1rem;
             background: rgba(128, 174, 179, 0.45);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+        }
+
+        .bookmark {
+            left: 0.5rem;
+        }
+
+        .rating {
+            right: 0.5rem;
 
             p {
                 font-size: 0.8rem;
@@ -55,6 +64,11 @@
                 font-size: 0.7rem;
                 color: var(--color-text-3);
             }
+        }
+
+        .recipe-navigation {
+            font-size: 0.8rem;
+            color: var(--color-primary);
         }
     }
 }
