@@ -20,12 +20,12 @@ export const routes: Routes = [
         component: RecipesComponent,
     },
     {
-        path: 'recipes/:id',
-        component: RecipeComponent,
-    },
-    {
         path: 'recipes/create',
         component: CreateRecipeComponent,
+    },
+    {
+        path: 'recipes/:id',
+        component: RecipeComponent,
     },
     {
         path: 'my-recipes',
