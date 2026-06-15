@@ -6,9 +6,9 @@ import { finalize, map } from 'rxjs';
 import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 import { ActivatedRoute, Params } from '@angular/router';
 
-type SearchParams = {
-    params: string;
-    queryParams: { q: string };
+type RequestParams = {
+    params: string | undefined;
+    queryParams: { [key: string]: string };
 };
 
 @Component({
@@ -27,14 +27,14 @@ export class RecipesListComponent implements OnInit {
     public isLoading = signal<boolean>(true);
 
     public ngOnInit(): void {
-        this.trackRoutes();
+        this.trackParams();
     }
 
-    private getRecipes(searchParams?: SearchParams): void {
+    private getRecipes(requestParams?: RequestParams): void {
         this.isLoading.set(true);
 
         this.recipesService
-            .getRecipes(searchParams?.queryParams, undefined, searchParams?.params)
+            .getRecipes(requestParams?.queryParams, undefined, requestParams?.params)
             .pipe(
                 map((preResponse) => {
                     return preResponse.recipes;
@@ -50,7 +50,7 @@ export class RecipesListComponent implements OnInit {
             });
     }
 
-    private trackRoutes(): void {
+    private trackParams(): void {
         this.route.queryParams.subscribe({
             next: (params: Params) => {
                 this.handleGetRecipesByParams(params);
@@ -65,15 +65,18 @@ export class RecipesListComponent implements OnInit {
         }
 
         const q = params['q'];
+        const sortBy = params['sortBy'];
+        const order = params['order'];
 
-        if (q) {
-            const searchParams: SearchParams = {
-                params: '/search',
-                queryParams: { q },
-            };
+        const queryParams = Object.fromEntries(
+            Object.entries({ q, sortBy, order }).filter(([_, value]) => value !== undefined)
+        );
 
-            this.getRecipes(searchParams);
-            return;
-        }
+        const requestParams: RequestParams = {
+            params: '/search',
+            queryParams,
+        };
+
+        this.getRecipes(requestParams);
     }
 }
