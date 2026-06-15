@@ -9,6 +9,7 @@ import { InfoBoxComponent } from '../../components/info-box/info-box.component';
 import { IngredientsComponent } from '../../components/ingredients/ingredients.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { BottomSheetComponent } from '../../shared/components/bottom-sheet/bottom-sheet.component';
+import { InstructionsComponent } from '../../components/instructions/instructions.component';
 
 @Component({
     selector: 'app-recipe',
@@ -20,6 +21,7 @@ import { BottomSheetComponent } from '../../shared/components/bottom-sheet/botto
         IngredientsComponent,
         ButtonComponent,
         BottomSheetComponent,
+        InstructionsComponent,
     ],
     templateUrl: './recipe.component.html',
     styleUrl: './recipe.component.css',

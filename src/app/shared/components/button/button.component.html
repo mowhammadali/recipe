@@ -1,7 +1,9 @@
 <button
     class="shared-button"
     [style.backgroundColor]="backgroundColor"
+    [class.full-width]="fullWidth"
     [style.color]="textColor"
+    [style.fontSize]="fontSize"
     (click)="task.emit()"
 >
     <ng-content></ng-content>

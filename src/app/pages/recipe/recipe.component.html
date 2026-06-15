@@ -20,10 +20,12 @@
         </div>
         <div class="content">
             <app-ingredients [ingredients]="recipe().ingredients"></app-ingredients>
-            <app-button (task)="onOpenSheet()"> click me </app-button>
+            <app-button (task)="onOpenSheet()" font-size="1.1rem" [full-width]="true"
+                >See Instructions</app-button
+            >
         </div>
         <app-bottom-sheet [isOpen]="sheetVisibility()" padding="20px" (closed)="onCloseSheet()">
-            <h3>Hello world</h3>
+            <app-instructions [recipe]="recipe()"></app-instructions>
         </app-bottom-sheet>
     }
 </div>

@@ -1,10 +1,10 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { NgIf, NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-bottom-sheet',
     standalone: true,
-    imports: [NgClass, NgStyle, NgIf],
+    imports: [NgStyle, NgIf],
     templateUrl: './bottom-sheet.component.html',
     styleUrl: './bottom-sheet.component.css',
 })
