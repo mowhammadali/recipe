@@ -7,10 +7,18 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
 import { type RecipeType } from '../../types/recipes.type';
 import { InfoBoxComponent } from '../../components/info-box/info-box.component';
 import { IngredientsComponent } from '../../components/ingredients/ingredients.component';
+import { ButtonComponent } from '../../shared/components/button/button.component';
 
 @Component({
     selector: 'app-recipe',
-    imports: [SkeletonComponent, IconComponent, RouterLink, InfoBoxComponent, IngredientsComponent],
+    imports: [
+        SkeletonComponent,
+        IconComponent,
+        RouterLink,
+        InfoBoxComponent,
+        IngredientsComponent,
+        ButtonComponent,
+    ],
     templateUrl: './recipe.component.html',
     styleUrl: './recipe.component.css',
 })
@@ -40,7 +48,6 @@ export class RecipeComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     this.recipe.set(response);
-                    console.log(response);
                 },
             });
     }

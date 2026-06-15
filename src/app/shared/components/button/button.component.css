@@ -1,0 +1,16 @@
+.shared-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.8rem;
+    border: none;
+    outline: none;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
