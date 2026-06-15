@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'app-button',
@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core';
 export class ButtonComponent {
     @Input('background-color') backgroundColor: string = 'var(--color-primary)';
     @Input('text-color') textColor: string = 'var(--color-surface-2)';
-    @Input('task') task: () => any = () => {};
+    @Output() task = new EventEmitter<any>();
 }

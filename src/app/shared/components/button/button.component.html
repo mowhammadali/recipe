@@ -2,7 +2,7 @@
     class="shared-button"
     [style.backgroundColor]="backgroundColor"
     [style.color]="textColor"
-    (click)="task()"
+    (click)="task.emit()"
 >
     <ng-content></ng-content>
 </button>

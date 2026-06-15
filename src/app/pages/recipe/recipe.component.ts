@@ -8,6 +8,7 @@ import { type RecipeType } from '../../types/recipes.type';
 import { InfoBoxComponent } from '../../components/info-box/info-box.component';
 import { IngredientsComponent } from '../../components/ingredients/ingredients.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
+import { BottomSheetComponent } from '../../shared/components/bottom-sheet/bottom-sheet.component';
 
 @Component({
     selector: 'app-recipe',
@@ -18,6 +19,7 @@ import { ButtonComponent } from '../../shared/components/button/button.component
         InfoBoxComponent,
         IngredientsComponent,
         ButtonComponent,
+        BottomSheetComponent,
     ],
     templateUrl: './recipe.component.html',
     styleUrl: './recipe.component.css',
@@ -30,6 +32,7 @@ export class RecipeComponent implements OnInit {
 
     public isLoading = signal<boolean>(true);
     public recipe = signal<RecipeType>({} as RecipeType);
+    public sheetVisibility = signal<boolean>(false);
 
     public ngOnInit(): void {
         this.trackParams();
@@ -56,5 +59,13 @@ export class RecipeComponent implements OnInit {
         this.route.params.subscribe((params: Params) => {
             this.getRecipe(params['id']);
         });
+    }
+
+    public onOpenSheet(): void {
+        this.sheetVisibility.set(true);
+    }
+
+    public onCloseSheet(): void {
+        this.sheetVisibility.set(false);
     }
 }

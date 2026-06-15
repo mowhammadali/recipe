@@ -1,0 +1,10 @@
+<div class="bs-backdrop" *ngIf="isOpen" (click)="close()"></div>
+<div
+    class="bs-container"
+    *ngIf="isOpen"
+    [ngStyle]="{ padding: padding }"
+    (click)="$event.stopPropagation()"
+>
+    <div class="bs-handle"></div>
+    <ng-content></ng-content>
+</div>

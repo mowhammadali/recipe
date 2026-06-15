@@ -15,7 +15,8 @@
         img {
             inline-size: 100%;
             block-size: 100%;
-            border-radius: 2rem;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
         }
 
         .back-contaienr,
