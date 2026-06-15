@@ -1,0 +1,42 @@
+.info-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 3rem);
+    inline-size: 80%;
+    block-size: 6rem;
+    border-radius: 1.5rem;
+    background-color: var(--color-surface-1);
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.04),
+        0 6px 16px rgba(0, 0, 0, 0.06);
+
+    h5 {
+        font-size: 1rem;
+        color: var(--color-text-3);
+    }
+
+    .details {
+        inline-size: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+
+        .icon-container {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+
+            p {
+                font-size: 0.9rem;
+                color: var(--color-text-4);
+            }
+        }
+    }
+}

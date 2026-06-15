@@ -7,9 +7,13 @@
 
     .cover-container {
         position: relative;
+        margin-bottom: 4rem;
+        inline-size: 100%;
+        block-size: 382px;
 
         img {
             inline-size: 100%;
+            block-size: 100%;
             border-radius: 2rem;
         }
 

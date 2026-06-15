@@ -5,10 +5,11 @@ import { finalize } from 'rxjs';
 import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { type RecipeType } from '../../types/recipes.type';
+import { InfoBoxComponent } from '../../components/info-box/info-box.component';
 
 @Component({
     selector: 'app-recipe',
-    imports: [SkeletonComponent, IconComponent, RouterLink],
+    imports: [SkeletonComponent, IconComponent, RouterLink, InfoBoxComponent],
     templateUrl: './recipe.component.html',
     styleUrl: './recipe.component.css',
 })
