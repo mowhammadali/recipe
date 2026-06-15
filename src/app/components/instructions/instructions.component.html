@@ -1,0 +1,36 @@
+<div class="instructions">
+    <header>
+        <section class="title">
+            <h3>{{ recipe.name }}</h3>
+            <div class="duration">
+                <app-icon icon="mingcute:history-anticlockwise-fill" [size]="16"></app-icon>
+                <p>{{ recipe.cookTimeMinutes }} Min</p>
+            </div>
+        </section>
+        <section class="info">
+            <div class="info-box">
+                <img src="/images/star.png" />
+                <p class="info-box-value">{{ recipe.rating }}</p>
+                <p class="info-box-title">Rating</p>
+            </div>
+            <div class="info-box">
+                <img src="/images/fire.png" />
+                <p>{{ recipe.caloriesPerServing }}</p>
+                <p class="info-box-title">Calories</p>
+            </div>
+            <div class="info-box">
+                <img src="/images/human.png" />
+                <p>{{ recipe.servings }}</p>
+                <p class="info-box-title">Servings</p>
+            </div>
+        </section>
+    </header>
+    <div class="content">
+        <h4>Instructions</h4>
+        <ul class="instructions-list">
+            @for (instruction of recipe.instructions; track $index) {
+                <li>{{ $index + 1 + '. ' + instruction }}</li>
+            }
+        </ul>
+    </div>
+</div>

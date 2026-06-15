@@ -1,0 +1,92 @@
+.instructions {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    header {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h3 {
+                font-size: 1rem;
+                color: var(--color-text-3);
+            }
+
+            .duration {
+                display: flex;
+                align-items: center;
+                gap: 0.2rem;
+
+                p {
+                    font-size: 0.9rem;
+                    color: var(--color-text-4);
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .info {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+
+            .info-box {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 0.8rem;
+                inline-size: 3.8rem;
+                block-size: 4.6rem;
+                border: 1px solid rgb(211, 211, 211);
+                border-radius: 1rem;
+
+                img {
+                    inline-size: 1.6rem;
+                }
+
+                .info-box-value {
+                    font-weight: 700;
+                    color: var(--color-text-1);
+                }
+
+                .info-box-title {
+                    font-size: 0.9rem;
+                    position: absolute;
+                    bottom: -1.5rem;
+                }
+            }
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+
+        h4 {
+            font-size: 1rem;
+            color: var(--color-text-3);
+        }
+
+        .instructions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+
+            li {
+                list-style: none;
+                font-size: 0.9rem;
+                color: var(--color-text-3);
+                line-height: 1.4;
+            }
+        }
+    }
+}
