@@ -34,8 +34,14 @@ export class RecipesListComponent implements OnInit {
     private getRecipes(requestParams?: RequestParams, mealType?: string): void {
         this.isLoading.set(true);
 
+        const queryParams = {
+            limit: '0',
+            skip: '0',
+            ...requestParams?.queryParams,
+        };
+
         this.recipesService
-            .getRecipes(requestParams?.queryParams, undefined, requestParams?.params)
+            .getRecipes(queryParams, undefined, requestParams?.params)
             .pipe(
                 map((preResponse) => {
                     if (mealType) {
