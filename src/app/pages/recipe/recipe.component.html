@@ -14,7 +14,11 @@
                 ></app-icon>
             </div>
             <div class="bookmark-contaienr">
-                <app-icon color="var(--color-surface-1)" icon="mingcute:bookmark-line"></app-icon>
+                <app-icon
+                    (task)="saveToBookmark()"
+                    color="var(--color-surface-1)"
+                    icon="mingcute:bookmark-line"
+                ></app-icon>
             </div>
             <app-info-box [recipe]="recipe()"></app-info-box>
         </div>
