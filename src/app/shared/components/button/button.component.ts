@@ -11,5 +11,6 @@ export class ButtonComponent {
     @Input('text-color') textColor: string = 'var(--color-surface-2)';
     @Input('font-size') fontSize: string = '1rem';
     @Input('full-width') fullWidth: boolean = false;
+    @Input('type') type: 'button' | 'submit' = 'button';
     @Output() task = new EventEmitter<any>();
 }

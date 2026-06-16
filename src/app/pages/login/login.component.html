@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="login">
+    <div class="form-card">
+        <header>
+            <img alt="login-background" src="/images/login-view.svg" class="form-card-image" />
+            <h2 class="form-card-title">Welcome to Recipe</h2>
+            <p class="form-card-description">
+                Sign in to discover, save, and share your favorite recipes.
+            </p>
+        </header>
+        <form>
+            <div class="field-container">
+                <app-icon
+                    icon="mingcute:user-2-fill"
+                    color="var(--color-surface-4)"
+                    hoverColor="var(--color-surface-4)"
+                ></app-icon>
+                <input type="text" value="emilys" placeholder="Email" />
+                <span class="error-message">error message</span>
+            </div>
+            <div class="field-container">
+                <app-icon
+                    icon="mingcute:lock-fill"
+                    color="var(--color-surface-4)"
+                    hoverColor="var(--color-surface-4)"
+                ></app-icon>
+                <input type="text" value="emilyspass" placeholder="Password" />
+                <span class="error-message">error message</span>
+            </div>
+            <app-button [full-width]="true" font-size="1.1rem" type="submit">Sign in</app-button>
+        </form>
+    </div>
+</div>
