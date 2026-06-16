@@ -4,6 +4,7 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { register } from 'swiper/element/bundle';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 register();
 
@@ -13,5 +14,6 @@ export const appConfig: ApplicationConfig = {
         provideRouter(routes),
         provideHttpClient(),
         provideAnimations(),
+        provideToastr(),
     ],
 };

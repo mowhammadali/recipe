@@ -1,0 +1,79 @@
+.login {
+    padding: 2.5rem;
+
+    .form-card {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        margin-block: 3rem;
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+
+            .form-card-image {
+                inline-size: 12rem;
+            }
+
+            .form-card-title {
+                font-size: 1.4rem;
+                color: var(--color-text-2);
+            }
+
+            .form-card-description {
+                text-align: center;
+                font-size: 1rem;
+                color: var(--color-text-4);
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 2.4rem;
+
+            .field-container {
+                position: relative;
+                inline-size: 100%;
+                block-size: 1.8rem;
+                display: flex;
+                align-items: flex-end;
+                gap: 0.8rem;
+
+                input {
+                    block-size: 100%;
+                    flex-grow: 1;
+                    background-color: transparent;
+                    outline: none;
+                    border: none;
+                    border-bottom: 1px solid var(--color-surface-4);
+                    color: var(--color-text-3);
+
+                    &.error {
+                        border-bottom-color: var(--color-danger);
+                    }
+
+                    &::placeholder {
+                        color: var(--color-surface-4);
+                    }
+                }
+
+                .error-message {
+                    position: absolute;
+                    bottom: -1.3rem;
+                    left: 2.3rem;
+                    font-size: 0.7rem;
+                    color: var(--color-danger);
+                }
+            }
+
+            .spinner {
+                &::ng-deep circle {
+                    stroke: var(--color-surface-1) !important;
+                }
+            }
+        }
+    }
+}
