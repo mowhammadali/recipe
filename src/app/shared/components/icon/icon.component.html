@@ -1,2 +1,8 @@
-<span class="icon" [ngStyle]="styles" (mouseenter)="hover = true" (mouseleave)="hover = false">
+<span
+    class="icon"
+    (click)="task.emit()"
+    [ngStyle]="styles"
+    (mouseenter)="hover = true"
+    (mouseleave)="hover = false"
+>
 </span>

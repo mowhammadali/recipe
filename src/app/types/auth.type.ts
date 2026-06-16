@@ -4,7 +4,12 @@ export type UserDataType = {
     expiresInMins?: number;
 };
 
-export type LoginResponseType = {
+type TokenType = {
+    accessToken: string;
+    refreshToken: string;
+};
+
+type UserInfoType = {
     id: number;
     username: string;
     email: string;
@@ -12,6 +17,7 @@ export type LoginResponseType = {
     lastName: string;
     gender: string;
     image: string;
-    accessToken: string;
-    refreshToken: string;
 };
+
+export type LoginResponseType = TokenType & UserInfoType;
+export type AuthType = UserInfoType & Partial<TokenType>;

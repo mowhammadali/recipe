@@ -42,4 +42,12 @@
             navigation-link="recipes"
         ></app-recipe-carousel>
     }
+    <app-button
+        [full-width]="true"
+        padding-block="1rem"
+        font-size="1.1rem"
+        background-color="var(--color-secondary)"
+        (task)="discoverMoreRecipes()"
+        >Discover</app-button
+    >
 </div>

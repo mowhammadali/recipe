@@ -30,11 +30,29 @@
         ></app-icon>
     </a>
     <a routerLink="login" class="link" routerLinkActive="active" #link4="routerLinkActive">
-        <app-icon
-            icon="mingcute:entrance-fill"
-            [color]="link4.isActive ? 'var(--color-text-1)' : 'var(--color-surface-4)'"
-            hoverColor="var(--color-text-1)"
-            [size]="30"
-        ></app-icon>
+        @if (authenticated()) {
+            <a
+                routerLink="profile"
+                class="link"
+                routerLinkActive="active"
+                #link4="routerLinkActive"
+            >
+                <app-icon
+                    icon="mingcute:user-4-fill"
+                    [color]="link4.isActive ? 'var(--color-text-1)' : 'var(--color-surface-4)'"
+                    hoverColor="var(--color-text-1)"
+                    [size]="30"
+                ></app-icon>
+            </a>
+        } @else {
+            <a routerLink="login" class="link" routerLinkActive="active" #link4="routerLinkActive">
+                <app-icon
+                    icon="mingcute:entrance-fill"
+                    [color]="link4.isActive ? 'var(--color-text-1)' : 'var(--color-surface-4)'"
+                    hoverColor="var(--color-text-1)"
+                    [size]="30"
+                ></app-icon>
+            </a>
+        }
     </a>
 </div>

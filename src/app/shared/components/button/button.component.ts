@@ -13,5 +13,7 @@ export class ButtonComponent {
     @Input('full-width') fullWidth: boolean = false;
     @Input('type') type: 'button' | 'submit' = 'button';
     @Input('disabled') disabled: boolean = false;
+    @Input('padding-inline') paddingInline: string = '';
+    @Input('padding-block') paddingBlock: string = '';
     @Output() task = new EventEmitter<any>();
 }

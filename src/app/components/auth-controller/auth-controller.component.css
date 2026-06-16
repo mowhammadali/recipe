@@ -1,0 +1,25 @@
+.auth-controller {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.5rem;
+
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--color-text-2);
+        }
+
+        img {
+            inline-size: 3.4rem;
+        }
+    }
+
+    p {
+        color: var(--color-text-3);
+    }
+}

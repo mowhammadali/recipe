@@ -12,7 +12,7 @@
     >
         <swiper-slide *ngFor="let recipe of recipes">
             <div class="recipe-carousel-card">
-                <img [ngSrc]="recipe.image" fill loading="lazy" />
+                <img [src]="recipe.image" (click)="navigateToRecipe(recipe.id)" />
                 <div class="recipe-carousel-glass-box">
                     <h6>{{ recipe.name | truncate: 15 }}</h6>
                     <footer>
@@ -25,8 +25,11 @@
                             ></app-icon>
                         </div>
                         <app-icon
+                            (task)="saveToBookmark()"
                             icon="mingcute:bookmark-line"
                             color="var(--color-surface-3)"
+                            hoverColor="var(--color-text-2)"
+                            style="cursor: pointer"
                         ></app-icon>
                     </footer>
                 </div>
