@@ -68,6 +68,12 @@
                     color: var(--color-danger);
                 }
             }
+
+            .spinner {
+                &::ng-deep circle {
+                    stroke: var(--color-surface-1) !important;
+                }
+            }
         }
     }
 }

@@ -42,7 +42,13 @@
                     >Password is required</span
                 >
             </div>
-            <app-button [full-width]="true" font-size="1.1rem" type="submit">Sign in</app-button>
+            <app-button [full-width]="true" font-size="1.1rem" type="submit">
+                @if (isSigning()) {
+                    <mat-spinner [diameter]="18" class="spinner"></mat-spinner>
+                } @else {
+                    Sign in
+                }
+            </app-button>
         </form>
     </div>
 </div>
