@@ -54,6 +54,7 @@ export class AuthService {
                 this.userSubject.next(response);
             }),
             catchError(() => {
+                this.removeToken();
                 return of(null);
             })
         );

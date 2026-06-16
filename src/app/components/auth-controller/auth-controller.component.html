@@ -1,0 +1,19 @@
+@if (!authenticated()) {
+    <div class="auth-controller">
+        <div class="title">
+            <h3>Unauthorized!</h3>
+            <img src="/images/potato.png" alt="potato" />
+        </div>
+        <p>Please login first to access this page</p>
+        <app-button (task)="navigateToLogin()">
+            Login
+            <app-icon
+                icon="mingcute:large-arrow-right-line"
+                color="var(--color-surface-1)"
+                hoverColor="var(--color-surface-1)"
+            ></app-icon>
+        </app-button>
+    </div>
+} @else {
+    <ng-content></ng-content>
+}
