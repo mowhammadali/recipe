@@ -11,7 +11,7 @@ export class IconComponent {
     @Input() icon: string = 'mingcute:user-5-fill';
     @Input() size: number = 24;
     @Input() color: string = 'var(--color-surface-4)';
-    @Input() hoverColor: string = 'var(--color-text-1)';
+    @Input() hoverColor: string | undefined = undefined;
     @Input() customStyles: { [key: string]: string } = {};
     @Output('task') task = new EventEmitter();
 
@@ -26,7 +26,7 @@ export class IconComponent {
             ...this.customStyles,
             width: this.size + 'px',
             height: this.size + 'px',
-            backgroundColor: this.hover ? this.hoverColor : this.color,
+            backgroundColor: this.hover ? this.hoverColor || this.color : this.color,
             WebkitMaskImage: `url(${this.iconUrl})`,
             maskImage: `url(${this.iconUrl})`,
         };

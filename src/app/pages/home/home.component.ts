@@ -5,15 +5,20 @@ import { finalize, map } from 'rxjs';
 import { type RecipeType } from '../../types/recipes.type';
 import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 import { NgOptimizedImage } from '@angular/common';
+import { ButtonComponent } from '../../shared/components/button/button.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home',
-    imports: [RecipeCarouselComponent, SkeletonComponent, NgOptimizedImage],
+    imports: [RecipeCarouselComponent, SkeletonComponent, NgOptimizedImage, ButtonComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-    constructor(private recipesService: RecipesService) {}
+    constructor(
+        private recipesService: RecipesService,
+        private router: Router
+    ) {}
 
     public mostPopularRecipesLoading = signal<boolean>(true);
     public dessertLoading = signal<boolean>(true);
@@ -71,5 +76,9 @@ export class HomeComponent implements OnInit {
                     console.log(error);
                 },
             });
+    }
+
+    public discoverMoreRecipes(): void {
+        this.router.navigate(['/recipes']);
     }
 }
