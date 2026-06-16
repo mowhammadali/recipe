@@ -12,5 +12,6 @@ export class ButtonComponent {
     @Input('font-size') fontSize: string = '1rem';
     @Input('full-width') fullWidth: boolean = false;
     @Input('type') type: 'button' | 'submit' = 'button';
+    @Input('disabled') disabled: boolean = false;
     @Output() task = new EventEmitter<any>();
 }

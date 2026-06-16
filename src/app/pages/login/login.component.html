@@ -7,15 +7,23 @@
                 Sign in to discover, save, and share your favorite recipes.
             </p>
         </header>
-        <form>
+        <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
             <div class="field-container">
                 <app-icon
                     icon="mingcute:user-2-fill"
                     color="var(--color-surface-4)"
                     hoverColor="var(--color-surface-4)"
                 ></app-icon>
-                <input type="text" value="emilys" placeholder="Email" />
-                <span class="error-message">error message</span>
+                <input
+                    type="text"
+                    value="emilys"
+                    placeholder="Email"
+                    formControlName="username"
+                    [class.error]="isFieldInvalid('username')"
+                />
+                <span class="error-message" *ngIf="isFieldInvalid('username')"
+                    >User name is required</span
+                >
             </div>
             <div class="field-container">
                 <app-icon
@@ -23,8 +31,16 @@
                     color="var(--color-surface-4)"
                     hoverColor="var(--color-surface-4)"
                 ></app-icon>
-                <input type="text" value="emilyspass" placeholder="Password" />
-                <span class="error-message">error message</span>
+                <input
+                    type="text"
+                    value="emilyspass"
+                    placeholder="Password"
+                    formControlName="password"
+                    [class.error]="isFieldInvalid('password')"
+                />
+                <span class="error-message" *ngIf="isFieldInvalid('password')"
+                    >Password is required</span
+                >
             </div>
             <app-button [full-width]="true" font-size="1.1rem" type="submit">Sign in</app-button>
         </form>
