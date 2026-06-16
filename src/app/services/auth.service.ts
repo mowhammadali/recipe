@@ -15,7 +15,7 @@ export class AuthService {
 
     isAuthenticated$ = this.user$.pipe(map((user) => !!user));
 
-    private tokenKey = 'accessToke';
+    private tokenKey = 'accessToken';
 
     get token(): string | null {
         return localStorage.getItem(this.tokenKey);

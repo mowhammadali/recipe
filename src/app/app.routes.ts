@@ -9,6 +9,7 @@ import { CreatedRecipesComponent } from './pages/created-recipes/created-recipes
 import { SavedRecipesComponent } from './pages/saved-recipes/saved-recipes.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { authGuard } from './core/auth.guard';
 
 export const routes: Routes = [
     {
@@ -38,6 +39,7 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [authGuard],
     },
     {
         path: 'login',

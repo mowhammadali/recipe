@@ -8,6 +8,7 @@ import { UserDataType } from '../../types/auth.type';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent {
     constructor(
         fb: FormBuilder,
         private authService: AuthService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private router: Router
     ) {
         this.loginFormGroup = fb.group({
             username: ['emilys', Validators.required],
@@ -70,10 +72,12 @@ export class LoginComponent {
                 })
             )
             .subscribe({
-                next: (response) => {
+                next: () => {
                     this.toastr.success('Login successful. Welcome!', 'Success', {
                         positionClass: 'toast-top-right',
                     });
+
+                    this.router.navigate(['/profile']);
                 },
             });
     }

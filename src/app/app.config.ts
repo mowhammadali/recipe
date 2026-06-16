@@ -6,6 +6,8 @@ import { register } from 'swiper/element/bundle';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { AuthInterceptor } from './core/auth.interceptor';
+import { provideAppInitializer } from '@angular/core';
+import { initializeAuth } from './core/auth.initializer';
 
 register();
 
@@ -16,6 +18,7 @@ export const appConfig: ApplicationConfig = {
         provideAnimations(),
         provideToastr(),
         provideHttpClient(withInterceptorsFromDi()),
+        provideAppInitializer(initializeAuth),
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
