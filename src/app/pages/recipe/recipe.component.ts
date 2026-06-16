@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Params, RouterLink } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { RecipesService } from '../../services/recipes.service';
 import { finalize, Subscription } from 'rxjs';
 import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
@@ -12,13 +12,13 @@ import { BottomSheetComponent } from '../../shared/components/bottom-sheet/botto
 import { InstructionsComponent } from '../../components/instructions/instructions.component';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-recipe',
     imports: [
         SkeletonComponent,
         IconComponent,
-        RouterLink,
         InfoBoxComponent,
         IngredientsComponent,
         ButtonComponent,
@@ -33,7 +33,8 @@ export class RecipeComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private recipesService: RecipesService,
         private authService: AuthService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private location: Location
     ) {}
 
     public isLoading = signal<boolean>(true);
@@ -74,6 +75,10 @@ export class RecipeComponent implements OnInit, OnDestroy {
         this.authSubscription = this.authService.isAuthenticated$.subscribe((isSignIn) => {
             this.authenticated.set(isSignIn);
         });
+    }
+
+    public getBack(): void {
+        this.location.back();
     }
 
     public onOpenSheet(): void {

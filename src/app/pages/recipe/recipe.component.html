@@ -7,7 +7,7 @@
     } @else {
         <div class="cover-container">
             <img [src]="recipe().image" />
-            <div class="back-contaienr" [routerLink]="['../']">
+            <div class="back-contaienr" (click)="getBack()">
                 <app-icon
                     color="var(--color-surface-1)"
                     icon="mingcute:arrow-left-circle-fill"

@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
         const params = {
             sortBy: 'rating',
             order: 'desc',
-            limit: '5',
+            limit: '10',
         };
 
         this.recipesService
