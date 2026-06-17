@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
         this.getUserInfo();
     }
 
-    public getUserInfo() {
+    private getUserInfo() {
         this.authService
             .getUserInfo()
             .pipe(
@@ -35,8 +35,7 @@ export class ProfileComponent implements OnInit {
                 }),
                 tap((response) => {
                     if (response == null) {
-                        this.authService.logout();
-                        this.router.navigate(['login']);
+                        this.logout();
                         return;
                     }
                 })
@@ -48,5 +47,14 @@ export class ProfileComponent implements OnInit {
                     this.userInfo.set(response);
                 },
             });
+    }
+
+    public navigation(path: string) {
+        this.router.navigate([path]);
+    }
+
+    public logout() {
+        this.authService.logout();
+        this.router.navigate(['login']);
     }
 }

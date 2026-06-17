@@ -45,7 +45,7 @@
         <div class="action-list">
             <div class="action-container">
                 <p class="title">Add new recipe</p>
-                <div class="action">
+                <div class="action" (click)="navigation('recipes/create')">
                     <app-icon
                         [size]="18"
                         color="var(--color-surface-1)"
@@ -55,7 +55,7 @@
             </div>
             <div class="action-container">
                 <p class="title">Saved recipes</p>
-                <div class="action">
+                <div class="action" (click)="navigation('my-recipes/saved')">
                     <app-icon
                         [size]="18"
                         color="var(--color-surface-1)"
@@ -65,7 +65,7 @@
             </div>
             <div class="action-container">
                 <p class="title">My Creations</p>
-                <div class="action">
+                <div class="action" (click)="navigation('my-recipes')">
                     <app-icon
                         [size]="18"
                         color="var(--color-surface-1)"
