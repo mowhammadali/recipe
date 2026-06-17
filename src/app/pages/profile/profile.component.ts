@@ -4,10 +4,11 @@ import { type AuthType } from '../../types/auth.type';
 import { map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { IconComponent } from '../../shared/components/icon/icon.component';
+import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 
 @Component({
     selector: 'app-profile',
-    imports: [IconComponent],
+    imports: [IconComponent, DialogComponent],
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.css',
 })
@@ -18,6 +19,7 @@ export class ProfileComponent implements OnInit {
     ) {}
 
     public userInfo = signal({} as AuthType);
+    public isDialogOpen = signal<boolean>(true);
 
     public ngOnInit(): void {
         this.getUserInfo();
