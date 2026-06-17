@@ -49,7 +49,7 @@ export class LoginComponent {
 
         const userData: UserDataType = {
             ...this.loginFormGroup.value,
-            expiresInMins: 10,
+            expiresInMins: 15,
         };
 
         this.loginUser(userData);

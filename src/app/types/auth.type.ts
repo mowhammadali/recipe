@@ -17,6 +17,11 @@ type UserInfoType = {
     lastName: string;
     gender: string;
     image: string;
+    phone: string;
+    role: string;
+    address: {
+        country: string;
+    };
 };
 
 export type LoginResponseType = TokenType & UserInfoType;
