@@ -2,11 +2,13 @@ import { Component, Input, CUSTOM_ELEMENTS_SCHEMA, OnInit, signal, OnDestroy } f
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { NgFor } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { type RecipeType } from '../../types/recipes.type';
+import type { RecipeType, MarkRecipeType } from '../../types/recipes.type';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { RecipesService } from '../../services/recipes.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-recipe-carousel',
@@ -19,6 +21,7 @@ import { Subscription } from 'rxjs';
 export class RecipeCarouselComponent implements OnInit, OnDestroy {
     constructor(
         private authService: AuthService,
+        private recipesService: RecipesService,
         private toastr: ToastrService,
         private router: Router
     ) {}
@@ -41,11 +44,20 @@ export class RecipeCarouselComponent implements OnInit, OnDestroy {
         this.router.navigate(['/recipes', id]);
     }
 
-    public saveToBookmark(): void {
+    public saveToBookmark(recipe: RecipeType): void {
         if (!this.authenticated()) {
             this.toastr.info('Please Login first to mark this recipe');
             return;
         }
+
+        const markedRecipe: MarkRecipeType = { ...recipe, recipeId: recipe.id };
+
+        this.toastr.success('The recipe has marked');
+        this.recipesService.markRecipe(markedRecipe).subscribe({
+            error: (error: HttpErrorResponse) => {
+                this.toastr.error(error.message);
+            },
+        });
     }
 
     public ngOnDestroy(): void {
