@@ -75,7 +75,7 @@
             </div>
             <div class="action-container">
                 <p class="title">Logout</p>
-                <div class="action logout">
+                <div class="action logout" (click)="openLogoutDialog()">
                     <app-icon
                         [size]="18"
                         color="var(--color-surface-1)"
@@ -85,7 +85,7 @@
             </div>
         </div>
     </div>
-    <app-dialog [(open)]="isDialogOpen" width="700px">
-        <h1>hello</h1>
+    <app-dialog [(open)]="isDialogOpen" width="20rem">
+        <app-logout-dialog-content></app-logout-dialog-content>
     </app-dialog>
 </div>

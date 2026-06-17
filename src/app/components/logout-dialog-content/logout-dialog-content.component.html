@@ -1,0 +1,9 @@
+<div class="dialog-content">
+    <p class="title">Are sure to sign out?</p>
+    <div class="actions">
+        <app-button background-color="var(--color-surface-4)" (task)="cancel()">Cancel</app-button>
+        <app-button background-color="var(--color-rose)" (task)="logout(); cancel()"
+            >Sign Out</app-button
+        >
+    </div>
+</div>

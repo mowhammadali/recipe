@@ -5,10 +5,11 @@ import { map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
+import { LogoutDialogContentComponent } from '../../components/logout-dialog-content/logout-dialog-content.component';
 
 @Component({
     selector: 'app-profile',
-    imports: [IconComponent, DialogComponent],
+    imports: [IconComponent, DialogComponent, LogoutDialogContentComponent],
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.css',
 })
@@ -19,7 +20,7 @@ export class ProfileComponent implements OnInit {
     ) {}
 
     public userInfo = signal({} as AuthType);
-    public isDialogOpen = signal<boolean>(true);
+    public isDialogOpen = signal<boolean>(false);
 
     public ngOnInit(): void {
         this.getUserInfo();
@@ -55,7 +56,11 @@ export class ProfileComponent implements OnInit {
         this.router.navigate([path]);
     }
 
-    public logout() {
+    public openLogoutDialog(): void {
+        this.isDialogOpen.set(true);
+    }
+
+    private logout() {
         this.authService.logout();
         this.router.navigate(['login']);
     }

@@ -1,0 +1,17 @@
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--color-text-2);
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+}
