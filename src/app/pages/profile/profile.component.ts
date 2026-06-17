@@ -1,15 +1,16 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { type AuthType } from '../../types/auth.type';
-import { map, tap } from 'rxjs';
+import { finalize, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { LogoutDialogContentComponent } from '../../components/logout-dialog-content/logout-dialog-content.component';
+import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 
 @Component({
     selector: 'app-profile',
-    imports: [IconComponent, DialogComponent, LogoutDialogContentComponent],
+    imports: [IconComponent, DialogComponent, LogoutDialogContentComponent, SkeletonComponent],
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.css',
 })
@@ -19,6 +20,7 @@ export class ProfileComponent implements OnInit {
         private router: Router
     ) {}
 
+    public isLoading = signal<boolean>(true);
     public userInfo = signal({} as AuthType);
     public isDialogOpen = signal<boolean>(false);
 
@@ -27,6 +29,8 @@ export class ProfileComponent implements OnInit {
     }
 
     private getUserInfo() {
+        this.isLoading.set(true);
+
         this.authService
             .getUserInfo()
             .pipe(
@@ -41,12 +45,13 @@ export class ProfileComponent implements OnInit {
                         this.logout();
                         return;
                     }
+                }),
+                finalize(() => {
+                    this.isLoading.set(false);
                 })
             )
             .subscribe({
                 next: (response) => {
-                    console.log(response);
-
                     this.userInfo.set(response);
                 },
             });
