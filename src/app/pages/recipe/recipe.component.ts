@@ -4,7 +4,7 @@ import { RecipesService } from '../../services/recipes.service';
 import { finalize, Subscription } from 'rxjs';
 import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 import { IconComponent } from '../../shared/components/icon/icon.component';
-import { type RecipeType } from '../../types/recipes.type';
+import { MarkRecipeType, type RecipeType } from '../../types/recipes.type';
 import { InfoBoxComponent } from '../../components/info-box/info-box.component';
 import { IngredientsComponent } from '../../components/ingredients/ingredients.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
@@ -13,6 +13,7 @@ import { InstructionsComponent } from '../../components/instructions/instruction
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-recipe',
@@ -89,11 +90,20 @@ export class RecipeComponent implements OnInit, OnDestroy {
         this.sheetVisibility.set(false);
     }
 
-    public saveToBookmark(): void {
+    public saveToBookmark(recipe: RecipeType): void {
         if (!this.authenticated()) {
             this.toastr.info('Please Login first to mark this recipe');
             return;
         }
+
+        const markedRecipe: MarkRecipeType = { ...recipe, recipeId: recipe.id };
+
+        this.toastr.success('The recipe has marked');
+        this.recipesService.markRecipe(markedRecipe).subscribe({
+            error: (error: HttpErrorResponse) => {
+                this.toastr.error(error.message);
+            },
+        });
     }
 
     public ngOnDestroy(): void {
