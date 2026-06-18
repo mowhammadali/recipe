@@ -48,11 +48,31 @@
         <div class="recipes-info">
             <div class="ingredients">
                 <h5>ingredients</h5>
-                <p class="no-data-message">There is no ingredient</p>
+                @if (ingredientList().length) {
+                    @for (ingredient of ingredientList(); track $index) {
+                        <div class="row-item">
+                            <app-icon [size]="14" icon="mingcute:delete-2-fill"></app-icon>
+                            <app-icon [size]="14" icon="mingcute:edit-3-fill"></app-icon>
+                            <p>{{ ingredient | truncate: 9 }}</p>
+                        </div>
+                    }
+                } @else {
+                    <p class="no-data-message">There is no ingredient</p>
+                }
             </div>
             <div class="instructions">
                 <h5>instructions</h5>
-                <p class="no-data-message">There is no instruction</p>
+                @if (instructionList().length) {
+                    @for (instruction of instructionList(); track $index) {
+                        <div class="row-item">
+                            <app-icon [size]="14" icon="mingcute:delete-2-fill"></app-icon>
+                            <app-icon [size]="14" icon="mingcute:edit-3-fill"></app-icon>
+                            <p>{{ instruction | truncate: 9 }}</p>
+                        </div>
+                    }
+                } @else {
+                    <p class="no-data-message">There is no instruction</p>
+                }
             </div>
         </div>
         <app-button [full-width]="true" padding-block="0.8rem">Create</app-button>

@@ -7,6 +7,7 @@ import { DialogComponent } from '../../shared/components/dialog/dialog.component
 import { ModifyIngredientComponent } from '../../components/modify-ingredient/modify-ingredient.component';
 import { InputDirective } from '../../directives/input.directive';
 import { ModifyInstructionComponent } from '../../components/modify-instruction/modify-instruction.component';
+import { TruncatePipe } from '../../pipes/truncate.pipe';
 
 @Component({
     selector: 'app-create-recipe',
@@ -19,6 +20,7 @@ import { ModifyInstructionComponent } from '../../components/modify-instruction/
         ModifyIngredientComponent,
         InputDirective,
         ModifyInstructionComponent,
+        TruncatePipe,
     ],
     templateUrl: './create-recipe.component.html',
     styleUrl: './create-recipe.component.css',
@@ -44,6 +46,6 @@ export class CreateRecipeComponent {
         this.ingredientList.update((ingredients) => [...ingredients, ingredient]);
     }
     public addNewInstruction(instruction: string): void {
-        console.log(instruction);
+        this.instructionList.update((instructions) => [...instructions, instruction]);
     }
 }

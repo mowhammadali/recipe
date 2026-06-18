@@ -84,6 +84,17 @@
                 color: var(--color-text-3);
             }
 
+            .row-item {
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+
+                p {
+                    font-size: 0.8rem;
+                    color: var(--color-text-3);
+                }
+            }
+
             .no-data-message {
                 font-size: 0.8rem;
                 font-weight: 300;
