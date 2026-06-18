@@ -15,11 +15,14 @@
             </div>
             <div class="bookmark-contaienr">
                 <app-icon
-                    (task)="saveToBookmark(recipe())"
+                    (task)="
+                        checkMarked(recipe())
+                            ? deleteMarkedRecipe(recipe().id)
+                            : saveToBookmark(recipe())
+                    "
                     color="var(--color-surface-1)"
-                    [icon]="`mingcute:bookmark-${checkMarked(recipe()) ? 'fill' : 'line'}`"
+                    [icon]="`mingcute:bookmark-${checkMarked(recipe()) ? (authenticated() ? 'fill' : 'line') : 'line'}`"
                     style="cursor: pointer"
-                    hoverColor="var(--color-text-2)"
                 ></app-icon>
             </div>
             <app-info-box [recipe]="recipe()"></app-info-box>

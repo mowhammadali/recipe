@@ -32,4 +32,8 @@ export class RecipesService {
     public getMarkedRecipes(): Observable<MarkRecipeType[]> {
         return this.mockApi.get('/saved');
     }
+
+    public deleteMarkedRecipe(id: number): Observable<any> {
+        return this.mockApi.delete(`/saved/${id}`);
+    }
 }

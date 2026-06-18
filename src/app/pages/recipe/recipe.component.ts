@@ -43,7 +43,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
     public isLoading = signal<boolean>(true);
     public recipe = signal<RecipeType>({} as RecipeType);
     public sheetVisibility = signal<boolean>(false);
-    private authenticated = signal<boolean>(false);
+    public authenticated = signal<boolean>(false);
     private authSubscription: Subscription;
     private markedRecipesSubject: Subscription;
     public markedRecipes = signal<MarkRecipeType[]>([]);
@@ -116,13 +116,38 @@ export class RecipeComponent implements OnInit, OnDestroy {
     }
 
     public checkMarked(recipe: RecipeType): boolean {
-        const isMarked = this.markedRecipes().some((rec) => rec.recipeId == recipe.id);
-        return isMarked;
+        const isMarked = this.markedRecipes().find((rec) => rec.recipeId == recipe.id);
+        return !!isMarked;
     }
 
     private trackMarkedRecipes(): void {
         this.markedRecipesSubject = this.markedRecipesService.recipes$.subscribe((recipes) => {
             this.markedRecipes.set(recipes);
+        });
+    }
+
+    public deleteMarkedRecipe(id: number) {
+        if (!this.authenticated()) {
+            this.toastr.info('Please Login first to mark this recipe');
+            return;
+        }
+
+        const mockApiId = this.markedRecipes().find((recipe) => recipe.recipeId == id)?.id;
+
+        if (!mockApiId) {
+            return;
+        }
+
+        this.toastr.success('The recipe has removed');
+        this.recipesService.deleteMarkedRecipe(mockApiId).subscribe({
+            next: () => {
+                this.refreshRecipesSubject = this.markedRecipesService
+                    .refreshRecipes()
+                    .subscribe({});
+            },
+            error: (error: HttpErrorResponse) => {
+                this.toastr.error(error.message);
+            },
         });
     }
 

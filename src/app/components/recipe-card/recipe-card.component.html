@@ -11,10 +11,11 @@
         </div>
         <div class="bookmark">
             <app-icon
-                (task)="saveToBookmark(recipe)"
+                (task)="
+                    checkMarked(recipe) ? deleteMarkedRecipe(recipe.id) : saveToBookmark(recipe)
+                "
                 color="var(--color-surface-1)"
-                [icon]="`mingcute:bookmark-${checkMarked(recipe) ? 'fill' : 'line'}`"
-                hoverColor="var(--color-text-2)"
+                [icon]="`mingcute:bookmark-${checkMarked(recipe) ? (authenticated() ? 'fill' : 'line') : 'line'}`"
                 style="cursor: pointer"
                 [size]="18"
                 [customStyles]="{
