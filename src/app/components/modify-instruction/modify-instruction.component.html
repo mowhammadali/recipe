@@ -1,18 +1,18 @@
 <div class="modify-ingredient">
     <h4>
         @if (isCreate) {
-            Add Ingredient
+            Add Instruction
         } @else {
-            Edit Ingredient
+            Edit Instruction
         }
     </h4>
-    <input
+    <textarea
         appInput
+        class="instruction"
         type="text"
-        class="ingredient"
-        placeholder="Ingredient..."
+        placeholder="Instruction..."
         [(ngModel)]="initialValue"
-    />
+    ></textarea>
     <div class="actions">
         <app-button background-color="var(--color-surface-4)" (task)="close()">Cancel</app-button>
         <app-button background-color="var(--color-success)" padding-inline="1.2rem">

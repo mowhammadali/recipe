@@ -5,12 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { InputDirective } from '../../directives/input.directive';
 
 @Component({
-    selector: 'app-modify-ingredient',
+    selector: 'app-modify-instruction',
     imports: [ButtonComponent, FormsModule, InputDirective],
-    templateUrl: './modify-ingredient.component.html',
-    styleUrl: './modify-ingredient.component.css',
+    templateUrl: './modify-instruction.component.html',
+    styleUrl: './modify-instruction.component.css',
 })
-export class ModifyIngredientComponent {
+export class ModifyInstructionComponent {
     constructor(private dialogRef: DialogRefService) {}
 
     @Input() type: 'edit' | 'create' = 'create';
