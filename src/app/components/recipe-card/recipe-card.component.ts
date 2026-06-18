@@ -1,11 +1,14 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
-import { type RecipeType } from '../../types/recipes.type';
+import { MarkRecipeType, type RecipeType } from '../../types/recipes.type';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { RecipesService } from '../../services/recipes.service';
+import { MarkedRecipesService } from '../../services/marked-recipes.service';
 
 @Component({
     selector: 'app-recipe-card',
@@ -18,11 +21,16 @@ export class RecipeCardComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private authService: AuthService,
-        private toastr: ToastrService
+        private recipesService: RecipesService,
+        private toastr: ToastrService,
+        private markedRecipesService: MarkedRecipesService
     ) {}
 
-    private authenticated = signal<boolean>(false);
+    public authenticated = signal<boolean>(false);
     private authSubscription: Subscription;
+    public markedRecipes = signal<MarkRecipeType[]>([]);
+    private markedRecipesSubject: Subscription;
+    private refreshRecipesSubject: Subscription;
 
     @Input() recipe = {} as RecipeType;
 
@@ -30,20 +38,74 @@ export class RecipeCardComponent implements OnInit {
         this.authSubscription = this.authService.isAuthenticated$.subscribe((isSignIn) => {
             this.authenticated.set(isSignIn);
         });
+
+        this.trackMarkedRecipes();
     }
 
     public navigateToRecipeDetails(id: number): void {
         this.router.navigate(['.', id], { relativeTo: this.route });
     }
 
-    public saveToBookmark(): void {
+    public saveToBookmark(recipe: RecipeType): void {
         if (!this.authenticated()) {
             this.toastr.info('Please Login first to mark this recipe');
             return;
         }
+
+        const markedRecipe: MarkRecipeType = { ...recipe, recipeId: recipe.id };
+
+        this.toastr.success('The recipe has marked');
+        this.recipesService.markRecipe(markedRecipe).subscribe({
+            next: () => {
+                this.refreshRecipesSubject = this.markedRecipesService
+                    .refreshRecipes()
+                    .subscribe({});
+            },
+            error: (error: HttpErrorResponse) => {
+                this.toastr.error(error.message);
+            },
+        });
+    }
+
+    public checkMarked(recipe: RecipeType): boolean {
+        const isMarked = this.markedRecipes().find((rec) => rec.recipeId == recipe.id);
+        return !!isMarked;
+    }
+
+    private trackMarkedRecipes(): void {
+        this.markedRecipesSubject = this.markedRecipesService.recipes$.subscribe((recipes) => {
+            this.markedRecipes.set(recipes);
+        });
+    }
+
+    public deleteMarkedRecipe(id: number) {
+        if (!this.authenticated()) {
+            this.toastr.info('Please Login first to mark this recipe');
+            return;
+        }
+
+        const mockApiId = this.markedRecipes().find((recipe) => recipe.recipeId == id)?.id;
+
+        if (!mockApiId) {
+            return;
+        }
+
+        this.toastr.success('The recipe has removed');
+        this.recipesService.deleteMarkedRecipe(mockApiId).subscribe({
+            next: () => {
+                this.refreshRecipesSubject = this.markedRecipesService
+                    .refreshRecipes()
+                    .subscribe({});
+            },
+            error: (error: HttpErrorResponse) => {
+                this.toastr.error(error.message);
+            },
+        });
     }
 
     public ngOnDestroy(): void {
-        this.authSubscription.unsubscribe();
+        this.authSubscription?.unsubscribe();
+        this.markedRecipesSubject?.unsubscribe();
+        this.refreshRecipesSubject?.unsubscribe();
     }
 }

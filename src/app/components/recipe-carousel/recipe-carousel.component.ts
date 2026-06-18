@@ -2,11 +2,14 @@ import { Component, Input, CUSTOM_ELEMENTS_SCHEMA, OnInit, signal, OnDestroy } f
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { NgFor } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { type RecipeType } from '../../types/recipes.type';
+import type { RecipeType, MarkRecipeType } from '../../types/recipes.type';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { RecipesService } from '../../services/recipes.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MarkedRecipesService } from '../../services/marked-recipes.service';
 
 @Component({
     selector: 'app-recipe-carousel',
@@ -19,12 +22,17 @@ import { Subscription } from 'rxjs';
 export class RecipeCarouselComponent implements OnInit, OnDestroy {
     constructor(
         private authService: AuthService,
+        private recipesService: RecipesService,
         private toastr: ToastrService,
-        private router: Router
+        private router: Router,
+        private markedRecipesService: MarkedRecipesService
     ) {}
 
-    private authenticated = signal<boolean>(false);
+    public authenticated = signal<boolean>(false);
+    public markedRecipes = signal<MarkRecipeType[]>([]);
     private authSubscription: Subscription;
+    private markedRecipesSubject: Subscription;
+    private refreshRecipesSubject: Subscription;
 
     @Input('carousel-title') title: string = '';
     @Input('navigation-link') navigationLink: string = '';
@@ -35,20 +43,74 @@ export class RecipeCarouselComponent implements OnInit, OnDestroy {
         this.authSubscription = this.authService.isAuthenticated$.subscribe((isSignIn) => {
             this.authenticated.set(isSignIn);
         });
+
+        this.trackMarkedRecipes();
     }
 
     public navigateToRecipe(id: string | number): void {
         this.router.navigate(['/recipes', id]);
     }
 
-    public saveToBookmark(): void {
+    public saveToBookmark(recipe: RecipeType): void {
         if (!this.authenticated()) {
             this.toastr.info('Please Login first to mark this recipe');
             return;
         }
+
+        const markedRecipe: MarkRecipeType = { ...recipe, recipeId: recipe.id };
+
+        this.toastr.success('The recipe has marked');
+        this.recipesService.markRecipe(markedRecipe).subscribe({
+            next: () => {
+                this.refreshRecipesSubject = this.markedRecipesService
+                    .refreshRecipes()
+                    .subscribe({});
+            },
+            error: (error: HttpErrorResponse) => {
+                this.toastr.error(error.message);
+            },
+        });
+    }
+
+    public checkMarked(recipe: RecipeType): boolean {
+        const isMarked = this.markedRecipes().find((rec) => rec.recipeId == recipe.id);
+        return !!isMarked;
+    }
+
+    private trackMarkedRecipes(): void {
+        this.markedRecipesSubject = this.markedRecipesService.recipes$.subscribe((recipes) => {
+            this.markedRecipes.set(recipes);
+        });
+    }
+
+    public deleteMarkedRecipe(id: number) {
+        if (!this.authenticated()) {
+            this.toastr.info('Please Login first to mark this recipe');
+            return;
+        }
+
+        const mockApiId = this.markedRecipes().find((recipe) => recipe.recipeId == id)?.id;
+
+        if (!mockApiId) {
+            return;
+        }
+
+        this.toastr.success('The recipe has removed');
+        this.recipesService.deleteMarkedRecipe(mockApiId).subscribe({
+            next: () => {
+                this.refreshRecipesSubject = this.markedRecipesService
+                    .refreshRecipes()
+                    .subscribe({});
+            },
+            error: (error: HttpErrorResponse) => {
+                this.toastr.error(error.message);
+            },
+        });
     }
 
     public ngOnDestroy(): void {
-        this.authSubscription.unsubscribe();
+        this.authSubscription?.unsubscribe();
+        this.markedRecipesSubject?.unsubscribe();
+        this.refreshRecipesSubject?.unsubscribe();
     }
 }

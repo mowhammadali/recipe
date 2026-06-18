@@ -25,10 +25,13 @@
                             ></app-icon>
                         </div>
                         <app-icon
-                            (task)="saveToBookmark()"
-                            icon="mingcute:bookmark-line"
+                            (task)="
+                                checkMarked(recipe)
+                                    ? deleteMarkedRecipe(recipe.id)
+                                    : saveToBookmark(recipe)
+                            "
+                            [icon]="`mingcute:bookmark-${checkMarked(recipe) ? (authenticated() ? 'fill' : 'line') : 'line'}`"
                             color="var(--color-surface-3)"
-                            hoverColor="var(--color-text-2)"
                             style="cursor: pointer"
                         ></app-icon>
                     </footer>

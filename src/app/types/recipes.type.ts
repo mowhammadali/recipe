@@ -17,6 +17,10 @@ export type RecipeType = {
     mealType: string[];
 };
 
+export type MarkRecipeType = RecipeType & {
+    recipeId: number;
+};
+
 export type RecipesResponseType = {
     limit: number;
     skip: number;
