@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { RecipesService } from '../../services/recipes.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MarkedRecipesService } from '../../services/marked-recipes.service';
 
 @Component({
     selector: 'app-recipe-carousel',
@@ -23,11 +24,14 @@ export class RecipeCarouselComponent implements OnInit, OnDestroy {
         private authService: AuthService,
         private recipesService: RecipesService,
         private toastr: ToastrService,
-        private router: Router
+        private router: Router,
+        private markedRecipesService: MarkedRecipesService
     ) {}
 
     private authenticated = signal<boolean>(false);
+    public markedRecipes = signal<MarkRecipeType[]>([]);
     private authSubscription: Subscription;
+    private markedRecipesSubject: Subscription;
 
     @Input('carousel-title') title: string = '';
     @Input('navigation-link') navigationLink: string = '';
@@ -38,6 +42,8 @@ export class RecipeCarouselComponent implements OnInit, OnDestroy {
         this.authSubscription = this.authService.isAuthenticated$.subscribe((isSignIn) => {
             this.authenticated.set(isSignIn);
         });
+
+        this.trackMarkedRecipes();
     }
 
     public navigateToRecipe(id: string | number): void {
@@ -60,7 +66,19 @@ export class RecipeCarouselComponent implements OnInit, OnDestroy {
         });
     }
 
+    public checkMarked(recipe: RecipeType): boolean {
+        const isMarked = this.markedRecipes().some((rec) => rec.recipeId == recipe.id);
+        return isMarked;
+    }
+
+    private trackMarkedRecipes(): void {
+        this.markedRecipesSubject = this.markedRecipesService.recipes$.subscribe((recipes) => {
+            this.markedRecipes.set(recipes);
+        });
+    }
+
     public ngOnDestroy(): void {
         this.authSubscription.unsubscribe();
+        this.markedRecipesSubject.unsubscribe();
     }
 }

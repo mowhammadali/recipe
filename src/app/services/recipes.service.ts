@@ -25,7 +25,11 @@ export class RecipesService {
         return this.api.get<RecipeType>('/recipes/' + id);
     }
 
-    public markRecipe(recipe: MarkRecipeType): Observable<any> {
+    public markRecipe(recipe: MarkRecipeType): Observable<MarkRecipeType> {
         return this.mockApi.post('/saved', recipe);
+    }
+
+    public getMarkedRecipes(): Observable<MarkRecipeType[]> {
+        return this.mockApi.get('/saved');
     }
 }

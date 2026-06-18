@@ -26,7 +26,7 @@
                         </div>
                         <app-icon
                             (task)="saveToBookmark(recipe)"
-                            icon="mingcute:bookmark-line"
+                            [icon]="`mingcute:bookmark-${checkMarked(recipe) ? 'fill' : 'line'}`"
                             color="var(--color-surface-3)"
                             hoverColor="var(--color-text-2)"
                             style="cursor: pointer"

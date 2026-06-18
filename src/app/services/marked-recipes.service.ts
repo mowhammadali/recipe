@@ -1,0 +1,30 @@
+import { Injectable } from '@angular/core';
+import { RecipesService } from './recipes.service';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import type { MarkRecipeType } from '../types/recipes.type';
+
+@Injectable({
+    providedIn: 'root',
+})
+export class MarkedRecipesService {
+    constructor(private recipesService: RecipesService) {}
+
+    private recipesSubject = new BehaviorSubject<MarkRecipeType[]>([]);
+
+    public recipes$ = this.recipesSubject.asObservable();
+
+    private loaded = false;
+
+    public loadRecipes(): Observable<MarkRecipeType[]> {
+        if (this.loaded) {
+            return of(this.recipesSubject.value);
+        }
+
+        return this.recipesService.getMarkedRecipes().pipe(
+            tap((recipes) => {
+                this.loaded = true;
+                this.recipesSubject.next(recipes);
+            })
+        );
+    }
+}

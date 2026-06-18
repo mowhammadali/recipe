@@ -14,6 +14,7 @@ import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MarkedRecipesService } from '../../services/marked-recipes.service';
 
 @Component({
     selector: 'app-recipe',
@@ -35,7 +36,8 @@ export class RecipeComponent implements OnInit, OnDestroy {
         private recipesService: RecipesService,
         private authService: AuthService,
         private toastr: ToastrService,
-        private location: Location
+        private location: Location,
+        private markedRecipesService: MarkedRecipesService
     ) {}
 
     public isLoading = signal<boolean>(true);
@@ -43,10 +45,13 @@ export class RecipeComponent implements OnInit, OnDestroy {
     public sheetVisibility = signal<boolean>(false);
     private authenticated = signal<boolean>(false);
     private authSubscription: Subscription;
+    private markedRecipesSubject: Subscription;
+    public markedRecipes = signal<MarkRecipeType[]>([]);
 
     public ngOnInit(): void {
         this.trackParams();
         this.trackAuthentication();
+        this.trackMarkedRecipes();
     }
 
     private getRecipe(id: string): void {
@@ -106,7 +111,19 @@ export class RecipeComponent implements OnInit, OnDestroy {
         });
     }
 
+    public checkMarked(recipe: RecipeType): boolean {
+        const isMarked = this.markedRecipes().some((rec) => rec.recipeId == recipe.id);
+        return isMarked;
+    }
+
+    private trackMarkedRecipes(): void {
+        this.markedRecipesSubject = this.markedRecipesService.recipes$.subscribe((recipes) => {
+            this.markedRecipes.set(recipes);
+        });
+    }
+
     public ngOnDestroy(): void {
         this.authSubscription.unsubscribe();
+        this.markedRecipesSubject.unsubscribe();
     }
 }
