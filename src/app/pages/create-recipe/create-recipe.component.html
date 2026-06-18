@@ -35,11 +35,11 @@
                 </div>
             </div>
             <div class="actions">
-                <button class="action" (click)="openModifyIngredient()">
+                <button class="action" (click)="openModifyIngredient('', null, 'create')">
                     Add Ingredient
                     <app-icon icon="ic:outline-plus" color="var(--color-primary)"></app-icon>
                 </button>
-                <button class="action" (click)="openModifyInstruction()">
+                <button class="action" (click)="openModifyInstruction('', null, 'create')">
                     Add Instruction
                     <app-icon icon="ic:outline-plus" color="var(--color-primary)"></app-icon>
                 </button>
@@ -51,8 +51,17 @@
                 @if (ingredientList().length) {
                     @for (ingredient of ingredientList(); track $index) {
                         <div class="row-item">
-                            <app-icon [size]="14" icon="mingcute:delete-2-fill"></app-icon>
-                            <app-icon [size]="14" icon="mingcute:edit-3-fill"></app-icon>
+                            <app-icon
+                                [size]="14"
+                                icon="mingcute:delete-2-fill"
+                                style="cursor: pointer"
+                            ></app-icon>
+                            <app-icon
+                                [size]="14"
+                                icon="mingcute:edit-3-fill"
+                                (task)="openModifyIngredient(ingredient, $index, 'edit')"
+                                style="cursor: pointer"
+                            ></app-icon>
                             <p>{{ ingredient | truncate: 9 }}</p>
                         </div>
                     }
@@ -65,8 +74,17 @@
                 @if (instructionList().length) {
                     @for (instruction of instructionList(); track $index) {
                         <div class="row-item">
-                            <app-icon [size]="14" icon="mingcute:delete-2-fill"></app-icon>
-                            <app-icon [size]="14" icon="mingcute:edit-3-fill"></app-icon>
+                            <app-icon
+                                [size]="14"
+                                icon="mingcute:delete-2-fill"
+                                style="cursor: pointer"
+                            ></app-icon>
+                            <app-icon
+                                [size]="14"
+                                icon="mingcute:edit-3-fill"
+                                (task)="openModifyInstruction(instruction, $index, 'edit')"
+                                style="cursor: pointer"
+                            ></app-icon>
                             <p>{{ instruction | truncate: 9 }}</p>
                         </div>
                     }
@@ -78,13 +96,15 @@
         <app-button [full-width]="true" padding-block="0.8rem">Create</app-button>
         <app-dialog [closeOnBackdrop]="false" [(open)]="modifyIngredientDialogOpening">
             <app-modify-ingredient
-                type="create"
+                [type]="tempIngredientType"
+                [initial-value]="tempIngredientValue"
                 (add)="addNewIngredient($event)"
             ></app-modify-ingredient>
         </app-dialog>
         <app-dialog [closeOnBackdrop]="false" [(open)]="modifyInstructionDialogOpening">
             <app-modify-instruction
-                type="create"
+                [type]="tempInstructionType"
+                [initial-value]="tempInstructionValue"
                 (add)="addNewInstruction($event)"
             ></app-modify-instruction>
         </app-dialog>

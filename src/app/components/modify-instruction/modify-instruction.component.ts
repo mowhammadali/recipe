@@ -27,7 +27,10 @@ export class ModifyInstructionComponent {
 
     public modify(): void {
         if (this.initialValue) {
-            this.addInstruction.emit(this.initialValue);
+            this.addInstruction.emit({
+                value: this.initialValue,
+                type: this.type,
+            });
             this.initialValue = '';
             this.close();
         }

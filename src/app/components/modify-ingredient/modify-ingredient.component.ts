@@ -27,7 +27,10 @@ export class ModifyIngredientComponent {
 
     public modify(): void {
         if (this.initialValue) {
-            this.addIngredient.emit(this.initialValue);
+            this.addIngredient.emit({
+                value: this.initialValue,
+                type: this.type,
+            });
             this.initialValue = '';
             this.close();
         }
