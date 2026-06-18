@@ -5,6 +5,7 @@ import { ButtonComponent } from '../../shared/components/button/button.component
 import { FormsModule } from '@angular/forms';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { ModifyIngredientComponent } from '../../components/modify-ingredient/modify-ingredient.component';
+import { InputDirective } from '../../directives/input.directive';
 
 @Component({
     selector: 'app-create-recipe',
@@ -15,6 +16,7 @@ import { ModifyIngredientComponent } from '../../components/modify-ingredient/mo
         FormsModule,
         DialogComponent,
         ModifyIngredientComponent,
+        InputDirective,
     ],
     templateUrl: './create-recipe.component.html',
     styleUrl: './create-recipe.component.css',

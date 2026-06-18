@@ -44,22 +44,6 @@
                 grid-area: time;
             }
 
-            input,
-            select {
-                inline-size: 100%;
-                block-size: 2.2rem;
-                padding: 0 0.6rem;
-                border: 1px solid var(--color-border);
-                border-radius: 0.5rem;
-                outline: none;
-                color: var(--color-text-2);
-                background-color: transparent;
-
-                &::placeholder {
-                    font-size: 0.9rem;
-                }
-            }
-
             option {
                 color: var(--color-text-2);
             }

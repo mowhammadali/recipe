@@ -2,10 +2,11 @@ import { Component, Input } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { DialogRefService } from '../../services/dialog-ref.service';
 import { FormsModule } from '@angular/forms';
+import { InputDirective } from '../../directives/input.directive';
 
 @Component({
     selector: 'app-modify-ingredient',
-    imports: [ButtonComponent, FormsModule],
+    imports: [ButtonComponent, FormsModule, InputDirective],
     templateUrl: './modify-ingredient.component.html',
     styleUrl: './modify-ingredient.component.css',
 })
