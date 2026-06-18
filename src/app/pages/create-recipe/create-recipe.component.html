@@ -57,10 +57,16 @@
         </div>
         <app-button [full-width]="true" padding-block="0.8rem">Create</app-button>
         <app-dialog [closeOnBackdrop]="false" [(open)]="modifyIngredientDialogOpening">
-            <app-modify-ingredient type="create"></app-modify-ingredient>
+            <app-modify-ingredient
+                type="create"
+                (add)="addNewIngredient($event)"
+            ></app-modify-ingredient>
         </app-dialog>
         <app-dialog [closeOnBackdrop]="false" [(open)]="modifyInstructionDialogOpening">
-            <app-modify-instruction type="create"></app-modify-instruction>
+            <app-modify-instruction
+                type="create"
+                (add)="addNewInstruction($event)"
+            ></app-modify-instruction>
         </app-dialog>
     </div>
 </app-auth-controller>

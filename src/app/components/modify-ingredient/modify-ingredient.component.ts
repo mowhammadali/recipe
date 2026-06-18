@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { DialogRefService } from '../../services/dialog-ref.service';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +15,7 @@ export class ModifyIngredientComponent {
 
     @Input() type: 'edit' | 'create' = 'create';
     @Input('initial-value') initialValue: string = '';
+    @Output('add') addIngredient = new EventEmitter();
 
     get isCreate(): boolean {
         return this.type === 'create';
@@ -22,5 +23,13 @@ export class ModifyIngredientComponent {
 
     public close(): void {
         this.dialogRef.close();
+    }
+
+    public modify(): void {
+        if (this.initialValue) {
+            this.addIngredient.emit(this.initialValue);
+            this.initialValue = '';
+            this.close();
+        }
     }
 }

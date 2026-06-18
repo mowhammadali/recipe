@@ -15,7 +15,11 @@
     />
     <div class="actions">
         <app-button background-color="var(--color-surface-4)" (task)="close()">Cancel</app-button>
-        <app-button background-color="var(--color-success)" padding-inline="1.2rem">
+        <app-button
+            background-color="var(--color-success)"
+            padding-inline="1.2rem"
+            (task)="modify()"
+        >
             @if (isCreate) {
                 Add
             } @else {

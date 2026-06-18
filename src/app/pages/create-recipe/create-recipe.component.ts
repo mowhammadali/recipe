@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { AuthControllerComponent } from '../../components/auth-controller/auth-controller.component';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
@@ -29,6 +29,8 @@ export class CreateRecipeComponent {
     public serving: string = '';
     public modifyIngredientDialogOpening: boolean = false;
     public modifyInstructionDialogOpening: boolean = false;
+    public ingredientList = signal<string[]>([]);
+    public instructionList = signal<string[]>([]);
 
     public openModifyIngredient(): void {
         this.modifyIngredientDialogOpening = true;
@@ -36,5 +38,12 @@ export class CreateRecipeComponent {
 
     public openModifyInstruction(): void {
         this.modifyInstructionDialogOpening = true;
+    }
+
+    public addNewIngredient(ingredient: string): void {
+        this.ingredientList.update((ingredients) => [...ingredients, ingredient]);
+    }
+    public addNewInstruction(instruction: string): void {
+        console.log(instruction);
     }
 }
