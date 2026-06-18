@@ -7,10 +7,10 @@
         <div class="generation">
             <div class="form">
                 <div class="recipe-name-input">
-                    <input type="text" placeholder="Recipe Name..." />
+                    <input type="text" placeholder="Recipe Name..." [(ngModel)]="recipeName" />
                 </div>
                 <div class="serving-input">
-                    <select>
+                    <select [(ngModel)]="serving">
                         <option value="" disabled selected>Serving</option>
                         <option>1</option>
                         <option>2</option>
@@ -19,11 +19,17 @@
                     </select>
                 </div>
                 <div class="time-input">
-                    <input type="number" min="0" max="120" placeholder="Preparing Time..." />
+                    <input
+                        type="number"
+                        min="0"
+                        max="120"
+                        placeholder="Preparing Time..."
+                        [(ngModel)]="preparingTime"
+                    />
                 </div>
             </div>
             <div class="actions">
-                <button class="action">
+                <button class="action" (click)="openModifyIngredient()">
                     Add Ingredient
                     <app-icon icon="ic:outline-plus" color="var(--color-primary)"></app-icon>
                 </button>
@@ -44,5 +50,8 @@
             </div>
         </div>
         <app-button [full-width]="true" padding-block="0.8rem">Create</app-button>
+        <app-dialog [closeOnBackdrop]="false" [(open)]="modifyIngredientDialogOpening">
+            <app-modify-ingredient type="create"></app-modify-ingredient>
+        </app-dialog>
     </div>
 </app-auth-controller>

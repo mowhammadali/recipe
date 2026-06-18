@@ -1,0 +1,31 @@
+.modify-ingredient {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h4 {
+        font-size: 1.2rem;
+        color: var(--color-text-3);
+    }
+
+    .ingredient {
+        inline-size: 100%;
+        block-size: 2.2rem;
+        padding: 0 0.6rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.5rem;
+        outline: none;
+        color: var(--color-text-2);
+        background-color: transparent;
+
+        &::placeholder {
+            font-size: 0.9rem;
+        }
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+}

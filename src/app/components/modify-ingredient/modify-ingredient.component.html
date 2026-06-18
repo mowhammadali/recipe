@@ -1,0 +1,20 @@
+<div class="modify-ingredient">
+    <h4>
+        @if (isCreate) {
+            Add Ingredient
+        } @else {
+            Edit Ingredient
+        }
+    </h4>
+    <input type="text" class="ingredient" placeholder="Ingredient..." [(ngModel)]="initialValue" />
+    <div class="actions">
+        <app-button background-color="var(--color-surface-4)" (task)="close()">Cancel</app-button>
+        <app-button [background-color]="'var(--color-success)'">
+            @if (isCreate) {
+                Add
+            } @else {
+                Edit
+            }
+        </app-button>
+    </div>
+</div>
