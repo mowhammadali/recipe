@@ -1,3 +1,48 @@
 <app-auth-controller>
-    <p>create recipe work!</p>
+    <div class="create-recipe">
+        <header>
+            <h2>Create New Recipe</h2>
+            <img src="/images/chef.svg" alt="chef" />
+        </header>
+        <div class="generation">
+            <div class="form">
+                <div class="recipe-name-input">
+                    <input type="text" placeholder="Recipe Name..." />
+                </div>
+                <div class="serving-input">
+                    <select>
+                        <option value="" disabled selected>Serving</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+                <div class="time-input">
+                    <input type="number" min="0" max="120" placeholder="Preparing Time..." />
+                </div>
+            </div>
+            <div class="actions">
+                <button class="action">
+                    Add Ingredient
+                    <app-icon icon="ic:outline-plus" color="var(--color-primary)"></app-icon>
+                </button>
+                <button class="action">
+                    Add Instruction
+                    <app-icon icon="ic:outline-plus" color="var(--color-primary)"></app-icon>
+                </button>
+            </div>
+        </div>
+        <div class="recipes-info">
+            <div class="ingredients">
+                <h5>ingredients</h5>
+                <p class="no-data-message">There is no ingredient</p>
+            </div>
+            <div class="instructions">
+                <h5>instructions</h5>
+                <p class="no-data-message">There is no instruction</p>
+            </div>
+        </div>
+        <app-button [full-width]="true" padding-block="0.8rem">Create</app-button>
+    </div>
 </app-auth-controller>

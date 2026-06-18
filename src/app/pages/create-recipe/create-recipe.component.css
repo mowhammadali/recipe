@@ -1,0 +1,110 @@
+.create-recipe {
+    padding: 1.5rem;
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--color-text-3);
+        }
+
+        img {
+            inline-size: 3rem;
+        }
+    }
+
+    .generation {
+        padding-bottom: 1.5rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid var(--color-border);
+
+        .form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            grid-template-areas:
+                'name name'
+                'time serving';
+            margin-bottom: 1rem;
+
+            .recipe-name-input {
+                grid-area: name;
+            }
+
+            .serving-input {
+                grid-area: serving;
+            }
+
+            .time-input {
+                grid-area: time;
+            }
+
+            input,
+            select {
+                inline-size: 100%;
+                block-size: 2.2rem;
+                padding: 0 0.6rem;
+                border: 1px solid var(--color-border);
+                border-radius: 0.5rem;
+                outline: none;
+                color: var(--color-text-2);
+                background-color: transparent;
+
+                &::placeholder {
+                    font-size: 0.9rem;
+                }
+            }
+
+            option {
+                color: var(--color-text-2);
+            }
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+
+            .action {
+                display: flex;
+                align-items: center;
+                gap: 0.2rem;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                color: var(--color-text-3);
+                background-color: transparent;
+            }
+        }
+    }
+
+    .recipes-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 2rem;
+
+        .ingredients,
+        .instructions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+
+            h5 {
+                font-size: 1.2rem;
+                color: var(--color-text-3);
+            }
+
+            .no-data-message {
+                font-size: 0.8rem;
+                font-weight: 300;
+                color: var(--color-text-4);
+            }
+        }
+    }
+}
