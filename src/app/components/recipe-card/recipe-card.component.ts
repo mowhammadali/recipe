@@ -30,6 +30,7 @@ export class RecipeCardComponent implements OnInit {
     private authSubscription: Subscription;
     public markedRecipes = signal<MarkRecipeType[]>([]);
     private markedRecipesSubject: Subscription;
+    private refreshRecipesSubject: Subscription;
 
     @Input() recipe = {} as RecipeType;
 
@@ -55,6 +56,11 @@ export class RecipeCardComponent implements OnInit {
 
         this.toastr.success('The recipe has marked');
         this.recipesService.markRecipe(markedRecipe).subscribe({
+            next: () => {
+                this.refreshRecipesSubject = this.markedRecipesService
+                    .refreshRecipes()
+                    .subscribe({});
+            },
             error: (error: HttpErrorResponse) => {
                 this.toastr.error(error.message);
             },
@@ -73,7 +79,8 @@ export class RecipeCardComponent implements OnInit {
     }
 
     public ngOnDestroy(): void {
-        this.authSubscription.unsubscribe();
-        this.markedRecipesSubject.unsubscribe();
+        this.authSubscription?.unsubscribe();
+        this.markedRecipesSubject?.unsubscribe();
+        this.refreshRecipesSubject?.unsubscribe();
     }
 }
