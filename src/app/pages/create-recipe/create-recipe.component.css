@@ -1,0 +1,128 @@
+.create-recipe {
+    padding: 1.5rem;
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--color-text-3);
+        }
+
+        img {
+            inline-size: 3rem;
+        }
+    }
+
+    .generation {
+        padding-bottom: 1.5rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid var(--color-border);
+
+        .form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            grid-template-areas:
+                'name name'
+                'time serving';
+            margin-bottom: 1rem;
+
+            .recipe-name-input {
+                grid-area: name;
+            }
+
+            .serving-input {
+                grid-area: serving;
+            }
+
+            .time-input {
+                grid-area: time;
+            }
+
+            option {
+                color: var(--color-text-2);
+            }
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+
+            .action {
+                display: flex;
+                align-items: center;
+                gap: 0.2rem;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                color: var(--color-text-3);
+                background-color: transparent;
+            }
+        }
+    }
+
+    .recipes-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 2rem;
+
+        .ingredients,
+        .instructions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+
+            h5 {
+                font-size: 1.2rem;
+                color: var(--color-text-3);
+            }
+
+            .row-item {
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+
+                p {
+                    font-size: 0.8rem;
+                    color: var(--color-text-3);
+                }
+            }
+
+            .no-data-message {
+                font-size: 0.8rem;
+                font-weight: 300;
+                color: var(--color-text-4);
+            }
+        }
+    }
+
+    .delete-dialog {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        p {
+            font-size: 1.2rem;
+            color: var(--color-text-3);
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+    }
+}
+
+.spinner {
+    &::ng-deep circle {
+        stroke: var(--color-surface-1) !important;
+    }
+}

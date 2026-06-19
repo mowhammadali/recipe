@@ -1,3 +1,150 @@
 <app-auth-controller>
-    <p>create recipe work!</p>
+    <div class="create-recipe">
+        <header>
+            <h2>Create New Recipe</h2>
+            <img src="/images/chef.svg" alt="chef" />
+        </header>
+        <div class="generation">
+            <div class="form">
+                <div class="recipe-name-input">
+                    <input
+                        appInput
+                        type="text"
+                        placeholder="Recipe Name..."
+                        [(ngModel)]="recipeName"
+                    />
+                </div>
+                <div class="serving-input">
+                    <select appInput [(ngModel)]="serving">
+                        <option value="" disabled selected>Serving</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+                <div class="time-input">
+                    <input
+                        appInput
+                        type="number"
+                        min="0"
+                        max="120"
+                        placeholder="Preparing Time..."
+                        [(ngModel)]="preparingTime"
+                    />
+                </div>
+            </div>
+            <div class="actions">
+                <button class="action" (click)="openModifyIngredient('', null, 'create')">
+                    Add Ingredient
+                    <app-icon icon="ic:outline-plus" color="var(--color-primary)"></app-icon>
+                </button>
+                <button class="action" (click)="openModifyInstruction('', null, 'create')">
+                    Add Instruction
+                    <app-icon icon="ic:outline-plus" color="var(--color-primary)"></app-icon>
+                </button>
+            </div>
+        </div>
+        <div class="recipes-info">
+            <div class="ingredients">
+                <h5>ingredients</h5>
+                @if (ingredientList().length) {
+                    @for (ingredient of ingredientList(); track $index) {
+                        <div class="row-item">
+                            <app-icon
+                                [size]="14"
+                                icon="mingcute:delete-2-fill"
+                                style="cursor: pointer"
+                                (task)="openDeleteDialog('ingredient', $index)"
+                            ></app-icon>
+                            <app-icon
+                                [size]="14"
+                                icon="mingcute:edit-3-fill"
+                                (task)="openModifyIngredient(ingredient, $index, 'edit')"
+                                style="cursor: pointer"
+                            ></app-icon>
+                            <p>{{ ingredient | truncate: 9 }}</p>
+                        </div>
+                    }
+                } @else {
+                    <p class="no-data-message">There is no ingredient</p>
+                }
+            </div>
+            <div class="instructions">
+                <h5>instructions</h5>
+                @if (instructionList().length) {
+                    @for (instruction of instructionList(); track $index) {
+                        <div class="row-item">
+                            <app-icon
+                                [size]="14"
+                                icon="mingcute:delete-2-fill"
+                                style="cursor: pointer"
+                                (task)="openDeleteDialog('instruction', $index)"
+                            ></app-icon>
+                            <app-icon
+                                [size]="14"
+                                icon="mingcute:edit-3-fill"
+                                (task)="openModifyInstruction(instruction, $index, 'edit')"
+                                style="cursor: pointer"
+                            ></app-icon>
+                            <p>{{ instruction | truncate: 9 }}</p>
+                        </div>
+                    }
+                } @else {
+                    <p class="no-data-message">There is no instruction</p>
+                }
+            </div>
+        </div>
+        <app-button
+            [full-width]="true"
+            padding-block="0.8rem"
+            [disabled]="
+                !(
+                    recipeName &&
+                    preparingTime &&
+                    serving &&
+                    ingredientList().length &&
+                    instructionList().length
+                )
+            "
+            (task)="createRecipe()"
+        >
+            @if (isSending) {
+                <mat-spinner [diameter]="18" class="spinner"></mat-spinner>
+            } @else {
+                Create
+            }
+        </app-button>
+        <app-dialog [closeOnBackdrop]="false" [(open)]="modifyIngredientDialogOpening">
+            <app-modify-ingredient
+                [type]="tempIngredientType"
+                [initial-value]="tempIngredientValue"
+                (add)="addNewIngredient($event)"
+            ></app-modify-ingredient>
+        </app-dialog>
+        <app-dialog [closeOnBackdrop]="false" [(open)]="modifyInstructionDialogOpening">
+            <app-modify-instruction
+                [type]="tempInstructionType"
+                [initial-value]="tempInstructionValue"
+                (add)="addNewInstruction($event)"
+            ></app-modify-instruction>
+        </app-dialog>
+        <app-dialog [(open)]="deleteDialogOpening" [closeOnBackdrop]="false">
+            <div class="delete-dialog">
+                <p>Are you sure?</p>
+                <div class="actions">
+                    <app-button
+                        background-color="var(--color-surface-4)"
+                        (task)="deleteDialogOpening = false"
+                        >Cancel</app-button
+                    >
+                    <app-button
+                        background-color="var(--color-danger)"
+                        (task)="deleteIngredient(deleteType)"
+                        >Delete</app-button
+                    >
+                </div>
+            </div>
+        </app-dialog>
+    </div>
 </app-auth-controller>

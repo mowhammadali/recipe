@@ -7,3 +7,11 @@
 body {
     font-family: 'Inter', sans-serif;
 }
+
+input,
+textarea,
+select,
+button,
+option {
+    font-family: 'Inter', sans-serif;
+}

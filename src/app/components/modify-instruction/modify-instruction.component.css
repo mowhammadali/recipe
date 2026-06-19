@@ -1,0 +1,22 @@
+.modify-ingredient {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h4 {
+        font-size: 1.2rem;
+        color: var(--color-text-3);
+    }
+
+    .instruction {
+        padding: 1rem;
+        min-block-size: 12rem;
+        resize: vertical;
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+}

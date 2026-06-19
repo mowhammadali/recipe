@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../core/dummy-api.service';
 import { type KeyValueType } from '../types/common.type';
-import type { RecipesResponseType, RecipeType, MarkRecipeType } from '../types/recipes.type';
+import type {
+    RecipesResponseType,
+    RecipeType,
+    MarkRecipeType,
+    CreatedRecipe,
+} from '../types/recipes.type';
 import { MockApiService } from '../core/mock-api.service';
 import { Observable } from 'rxjs';
 
@@ -35,5 +40,9 @@ export class RecipesService {
 
     public deleteMarkedRecipe(id: number): Observable<any> {
         return this.mockApi.delete(`/saved/${id}`);
+    }
+
+    public createNewRecipe(recipe: Omit<CreatedRecipe, 'id'>): Observable<any> {
+        return this.mockApi.post('/created', recipe);
     }
 }

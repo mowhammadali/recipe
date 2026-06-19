@@ -1,0 +1,30 @@
+<div class="modify-ingredient">
+    <h4>
+        @if (isCreate) {
+            Add Instruction
+        } @else {
+            Edit Instruction
+        }
+    </h4>
+    <textarea
+        appInput
+        class="instruction"
+        type="text"
+        placeholder="Instruction..."
+        [(ngModel)]="initialValue"
+    ></textarea>
+    <div class="actions">
+        <app-button background-color="var(--color-surface-4)" (task)="close()">Cancel</app-button>
+        <app-button
+            background-color="var(--color-success)"
+            padding-inline="1.2rem"
+            (task)="modify()"
+        >
+            @if (isCreate) {
+                Add
+            } @else {
+                Edit
+            }
+        </app-button>
+    </div>
+</div>

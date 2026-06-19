@@ -10,7 +10,7 @@ import { DialogRefService } from '../../../services/dialog-ref.service';
 })
 export class DialogComponent {
     @Input() open = false;
-    @Input() width = '500px';
+    @Input() width = '330px';
     @Input() closeOnBackdrop = true;
     @Output() openChange = new EventEmitter<boolean>();
 
