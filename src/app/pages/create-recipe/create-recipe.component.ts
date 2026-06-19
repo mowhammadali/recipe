@@ -9,6 +9,8 @@ import { InputDirective } from '../../directives/input.directive';
 import { ModifyInstructionComponent } from '../../components/modify-instruction/modify-instruction.component';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
 
+type DeleteType = 'ingredient' | 'instruction';
+
 type ModifyType = 'create' | 'edit';
 
 type ModifyInputType = {
@@ -38,10 +40,12 @@ export class CreateRecipeComponent {
     public serving: string = '';
     public modifyIngredientDialogOpening: boolean = false;
     public modifyInstructionDialogOpening: boolean = false;
+    public deleteDialogOpening: boolean = false;
     public tempIngredientValue: string = '';
     public tempInstructionValue: string = '';
     public tempIngredientType: ModifyType = 'create';
     public tempInstructionType: ModifyType = 'create';
+    public deleteType: DeleteType = 'ingredient';
     public tempIngredientIndex: number | null = null;
     public tempInstructionIndex: number | null = null;
     public ingredientList = signal<string[]>([]);
@@ -73,6 +77,7 @@ export class CreateRecipeComponent {
 
         this.ingredientList.update(() => [...newList]);
     }
+
     public addNewInstruction(input: ModifyInputType): void {
         if (input.type === 'create') {
             this.instructionList.update((instructions) => [...instructions, input.value]);
@@ -84,5 +89,33 @@ export class CreateRecipeComponent {
         );
 
         this.instructionList.update(() => [...newList]);
+    }
+
+    public openDeleteDialog(type: DeleteType, index: number | null): void {
+        if (type === 'ingredient') {
+            this.tempIngredientIndex = index;
+        } else {
+            this.tempInstructionIndex = index;
+        }
+        this.deleteType = type;
+        this.deleteDialogOpening = true;
+    }
+
+    public deleteIngredient(type: 'ingredient' | 'instruction'): void {
+        if (type === 'ingredient') {
+            const newList = this.ingredientList().filter(
+                (_, index) => index != this.tempIngredientIndex
+            );
+            this.ingredientList.update(() => [...newList]);
+        } else {
+            const newList = this.instructionList().filter(
+                (_, index) => index != this.tempInstructionIndex
+            );
+            this.instructionList.update(() => [...newList]);
+        }
+
+        this.tempIngredientIndex = null;
+        this.tempInstructionIndex = null;
+        this.deleteDialogOpening = false;
     }
 }

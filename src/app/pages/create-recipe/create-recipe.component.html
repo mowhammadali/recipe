@@ -55,6 +55,7 @@
                                 [size]="14"
                                 icon="mingcute:delete-2-fill"
                                 style="cursor: pointer"
+                                (task)="openDeleteDialog('ingredient', $index)"
                             ></app-icon>
                             <app-icon
                                 [size]="14"
@@ -78,6 +79,7 @@
                                 [size]="14"
                                 icon="mingcute:delete-2-fill"
                                 style="cursor: pointer"
+                                (task)="openDeleteDialog('instruction', $index)"
                             ></app-icon>
                             <app-icon
                                 [size]="14"
@@ -107,6 +109,23 @@
                 [initial-value]="tempInstructionValue"
                 (add)="addNewInstruction($event)"
             ></app-modify-instruction>
+        </app-dialog>
+        <app-dialog [(open)]="deleteDialogOpening" [closeOnBackdrop]="false">
+            <div class="delete-dialog">
+                <p>Are you sure?</p>
+                <div class="actions">
+                    <app-button
+                        background-color="var(--color-surface-4)"
+                        (task)="deleteDialogOpening = false"
+                        >Cancel</app-button
+                    >
+                    <app-button
+                        background-color="var(--color-danger)"
+                        (task)="deleteIngredient(deleteType)"
+                        >Delete</app-button
+                    >
+                </div>
+            </div>
         </app-dialog>
     </div>
 </app-auth-controller>
