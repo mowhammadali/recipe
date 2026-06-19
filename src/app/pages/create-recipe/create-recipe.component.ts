@@ -8,6 +8,11 @@ import { ModifyIngredientComponent } from '../../components/modify-ingredient/mo
 import { InputDirective } from '../../directives/input.directive';
 import { ModifyInstructionComponent } from '../../components/modify-instruction/modify-instruction.component';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
+import { RecipesService } from '../../services/recipes.service';
+import { CreatedRecipe } from '../../types/recipes.type';
+import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 type DeleteType = 'ingredient' | 'instruction';
 
@@ -30,17 +35,24 @@ type ModifyInputType = {
         InputDirective,
         ModifyInstructionComponent,
         TruncatePipe,
+        MatProgressSpinnerModule,
     ],
     templateUrl: './create-recipe.component.html',
     styleUrl: './create-recipe.component.css',
 })
 export class CreateRecipeComponent {
+    constructor(
+        private recipesService: RecipesService,
+        private toastr: ToastrService
+    ) {}
+
     public recipeName: string = '';
     public preparingTime: string = '';
     public serving: string = '';
     public modifyIngredientDialogOpening: boolean = false;
     public modifyInstructionDialogOpening: boolean = false;
     public deleteDialogOpening: boolean = false;
+    public isSending: boolean = false;
     public tempIngredientValue: string = '';
     public tempInstructionValue: string = '';
     public tempIngredientType: ModifyType = 'create';
@@ -117,5 +129,41 @@ export class CreateRecipeComponent {
         this.tempIngredientIndex = null;
         this.tempInstructionIndex = null;
         this.deleteDialogOpening = false;
+    }
+
+    public createRecipe(): void {
+        const recipe: Omit<CreatedRecipe, 'id'> = {
+            name: this.recipeName,
+            prepTimeMinutes: +this.preparingTime,
+            serving: +this.serving,
+            ingredients: this.ingredientList(),
+            instructions: this.instructionList(),
+            createdAt: new Date(),
+            image: 'https://dummyjson.com/image/300/282828?fontFamily=pacifico&text=Recipe',
+        };
+
+        this.isSending = true;
+
+        this.recipesService
+            .createNewRecipe(recipe)
+            .pipe(
+                finalize(() => {
+                    this.isSending = false;
+                })
+            )
+            .subscribe({
+                next: () => {
+                    this.toastr.success('Your recipe has created!');
+                    this.resetAllValues();
+                },
+            });
+    }
+
+    public resetAllValues(): void {
+        ((this.recipeName = ''),
+            (this.preparingTime = ''),
+            (this.serving = ''),
+            this.ingredientList.set([]));
+        this.instructionList.set([]);
     }
 }

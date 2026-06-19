@@ -95,7 +95,26 @@
                 }
             </div>
         </div>
-        <app-button [full-width]="true" padding-block="0.8rem">Create</app-button>
+        <app-button
+            [full-width]="true"
+            padding-block="0.8rem"
+            [disabled]="
+                !(
+                    recipeName &&
+                    preparingTime &&
+                    serving &&
+                    ingredientList().length &&
+                    instructionList().length
+                )
+            "
+            (task)="createRecipe()"
+        >
+            @if (isSending) {
+                <mat-spinner [diameter]="18" class="spinner"></mat-spinner>
+            } @else {
+                Create
+            }
+        </app-button>
         <app-dialog [closeOnBackdrop]="false" [(open)]="modifyIngredientDialogOpening">
             <app-modify-ingredient
                 [type]="tempIngredientType"

@@ -27,3 +27,14 @@ export type RecipesResponseType = {
     total: number;
     recipes: RecipeType[];
 };
+
+export type CreatedRecipe = {
+    id: number;
+    name: string;
+    ingredients: string[];
+    instructions: string[];
+    prepTimeMinutes: number;
+    serving: number;
+    image: string;
+    createdAt: Date | string;
+};
